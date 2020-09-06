@@ -1,4 +1,5 @@
-﻿using System;
+﻿using shader_configurator.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace shader_configurator
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            ControlManagement.SetControl(new Control());
+            MessageBox.Show("Success");
         }
     }
 }
