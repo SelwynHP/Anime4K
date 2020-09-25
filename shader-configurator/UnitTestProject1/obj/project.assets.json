@@ -5731,19 +5731,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HayatoS\\.nuget\\packages\\": {}
+    "C:\\Users\\Hayato\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HayatoS\\Documents\\GitHub\\Anime4K\\shader-configurator\\UnitTestProject1\\UnitTestProject1.csproj",
+      "projectUniqueName": "C:\\Users\\Hayato\\Documents\\GitHub\\Anime4K\\shader-configurator\\UnitTestProject1\\UnitTestProject1.csproj",
       "projectName": "UnitTestProject1",
-      "projectPath": "C:\\Users\\HayatoS\\Documents\\GitHub\\Anime4K\\shader-configurator\\UnitTestProject1\\UnitTestProject1.csproj",
-      "packagesPath": "C:\\Users\\HayatoS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HayatoS\\Documents\\GitHub\\Anime4K\\shader-configurator\\UnitTestProject1\\obj\\",
+      "projectPath": "C:\\Users\\Hayato\\Documents\\GitHub\\Anime4K\\shader-configurator\\UnitTestProject1\\UnitTestProject1.csproj",
+      "packagesPath": "C:\\Users\\Hayato\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hayato\\Documents\\GitHub\\Anime4K\\shader-configurator\\UnitTestProject1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HayatoS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hayato\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5756,8 +5756,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\HayatoS\\Documents\\GitHub\\Anime4K\\shader-configurator\\shader-configurator\\shader-configurator.csproj": {
-              "projectPath": "C:\\Users\\HayatoS\\Documents\\GitHub\\Anime4K\\shader-configurator\\shader-configurator\\shader-configurator.csproj"
+            "C:\\Users\\Hayato\\Documents\\GitHub\\Anime4K\\shader-configurator\\shader-configurator\\shader-configurator.csproj": {
+              "projectPath": "C:\\Users\\Hayato\\Documents\\GitHub\\Anime4K\\shader-configurator\\shader-configurator\\shader-configurator.csproj"
             }
           }
         }
@@ -5803,7 +5803,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

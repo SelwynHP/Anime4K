@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 
 namespace shader_configurator.DAL
 {
@@ -19,7 +21,9 @@ namespace shader_configurator.DAL
                 string str = sr.ReadLine();
                 while(str != null)
                 {
-                    
+                    Control control = new Control(str);
+                    cList.Add(control);
+                    str = sr.ReadLine();
                 }
             }
             return cList;
@@ -38,7 +42,48 @@ namespace shader_configurator.DAL
         {
             if (File.Exists(filepath))
             {
-                
+                List<Control> cList = GetControls();
+                //Control controlToDelete = new Control();
+                //foreach(Control element in cList)
+                //{
+                //    if (element.Equals(control))
+                //    {
+                //        controlToDelete = element;
+                //        break;
+                //    }
+                //}
+                if (cList.Remove(control))
+                {
+                    using (StreamWriter sw = new StreamWriter(filepath, false))
+                    {
+                        foreach (Control element in cList)
+                        {
+                            sw.WriteLine(element.Output());
+                        }
+                    }
+                }
+            }
+        }
+        public static void UpdateControl(Control control, Control newControl)
+        {
+            if (File.Exists(filepath))
+            {
+                List<Control> cList = GetControls();
+                int i = -1;
+                i = cList.IndexOf(control);
+                if(i != -1)
+                {
+                    cList.Insert(i, newControl);
+                    cList.Remove(control);
+
+                    using (StreamWriter sw = new StreamWriter(filepath, false))
+                    {
+                        foreach (Control element in cList)
+                        {
+                            sw.WriteLine(element.Output());
+                        }
+                    }
+                }
             }
         }
     }

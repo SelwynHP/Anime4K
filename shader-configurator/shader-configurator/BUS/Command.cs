@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -21,7 +22,7 @@ namespace shader_configurator
             Initialize();
             if (IsValidCommandString(cmd))
             {
-                string[] line = cmd.Trim('"').Split(';');
+                string[] line = cmd.Replace("~~/shaders/","").Trim('"').Split(';');
                 for(int i = 0; i < line.Length; i++)
                 {
                     values.Add(Shader.shaders.FirstOrDefault(x => x.Value == line[i]).Key);
@@ -50,7 +51,15 @@ namespace shader_configurator
 
         public string ValueOutput()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            Shader s = new Shader();
+            foreach(ShaderEnum element in this.values)
+            {
+                sb.Append(s.GetValue(element));
+                sb.Append(";");
+            }
+            string str = @"""" + sb.ToString().TrimEnd(';') + @"""";
+            return this.command_name + " " + str;
         }
     }
 }
