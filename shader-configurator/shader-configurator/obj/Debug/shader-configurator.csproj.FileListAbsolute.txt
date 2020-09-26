@@ -18,3 +18,4 @@ C:\Users\Hayato\Documents\GitHub\Anime4K\shader-configurator\shader-configurator
 C:\Users\Hayato\Documents\GitHub\Anime4K\shader-configurator\shader-configurator\obj\Debug\shader-configurator.csproj.CoreCompileInputs.cache
 C:\Users\Hayato\Documents\GitHub\Anime4K\shader-configurator\shader-configurator\obj\Debug\shader-configurator.exe
 C:\Users\Hayato\Documents\GitHub\Anime4K\shader-configurator\shader-configurator\obj\Debug\shader-configurator.pdb
+C:\Users\HayatoS\Documents\GitHub\Anime4K\shader-configurator\shader-configurator\obj\Debug\shader_configurator.GUI.ControlManagement.resources

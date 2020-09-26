@@ -6,6 +6,13 @@ using System.Windows.Forms;
 
 namespace shader_configurator
 {
+    public enum KeybindEnum
+    {
+        EMPTY,
+        CTRL,
+        SHIFT,
+        ALT
+    }
     public class Keybind
     {
         public string[] Keys{ get; set; }
@@ -37,13 +44,22 @@ namespace shader_configurator
             }
             this.Keys = keys;
         }
+
+        public string OutputRemoveNullEmpty(string v)
+        {
+            v = v.Replace("EMPTY+", "");
+            v = v.Replace("++","+");
+            v = v.Trim('+');
+            return v;
+        }
+
         public void Initialize()
         {
             this.Keys = new string[3] { "CTRL", "ALT", "1" };
         }
         public string Output()
         {
-            return String.Join("+", this.Keys);
+            return OutputRemoveNullEmpty(String.Join("+", this.Keys));
         }
     }
 }

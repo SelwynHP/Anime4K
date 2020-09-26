@@ -19,7 +19,7 @@ namespace shader_configurator.DAL
             using(StreamReader sr = new StreamReader(filepath))
             {
                 string str = sr.ReadLine();
-                while(str != null)
+                while(!String.IsNullOrEmpty(str))
                 {
                     Control control = new Control(str);
                     cList.Add(control);

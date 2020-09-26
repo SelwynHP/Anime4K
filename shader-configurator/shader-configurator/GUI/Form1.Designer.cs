@@ -28,19 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonTest = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // buttonTest
-            // 
-            this.buttonTest.Location = new System.Drawing.Point(320, 148);
-            this.buttonTest.Name = "buttonTest";
-            this.buttonTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonTest.TabIndex = 0;
-            this.buttonTest.Text = "Add";
-            this.buttonTest.UseVisualStyleBackColor = true;
-            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // buttonDelete
             // 
@@ -51,6 +41,16 @@
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // buttonTest
+            // 
+            this.buttonTest.Location = new System.Drawing.Point(320, 148);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonTest.TabIndex = 0;
+            this.buttonTest.Text = "Add";
+            this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // Form1
             // 
@@ -67,8 +67,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonTest;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonTest;
     }
 }
 

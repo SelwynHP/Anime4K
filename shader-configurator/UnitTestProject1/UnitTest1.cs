@@ -26,6 +26,15 @@ namespace UnitTestProject1
             string pattern = @"^((CTRL|ALT|SHIFT)\+){0,2}\w$";
             Assert.IsTrue(Regex.IsMatch(bind.Output(), pattern));
         }
+        [TestMethod]
+        public void KeybindOutputRemoveNullEmptyTest()
+        {
+            Keybind kb = new Keybind();
+            kb.Keys[1] = "EMPTY";
+
+            string str = kb.Output();
+            Assert.IsTrue(!str.Contains("EMPTY") || !str.Contains(@"\s"));
+        }
     }
     [TestClass]
     public class UnitTestCommand
@@ -90,6 +99,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ControlManagementSetControlTest()
         {
+            bool success = false;
             //Control Initialization
             Control control = new Control();
             control.keybind.Keys = new string[3] { "", "SHIFT", "2" };
@@ -100,11 +110,14 @@ namespace UnitTestProject1
 
             ControlManagement.SetControl(control);
             List<Control> cList = ControlManagement.GetControls();
-            Assert.IsTrue(control.Equals(cList.Last()));
+            if (control.Equals(cList.Last())) { success = true; ControlManagement.DeleteControl(control); }
+            Assert.IsTrue(success);
         }
         [TestMethod]
         public void ControlManagementUpdateControlTest()
         {
+            bool success = false;
+
             Control control = new Control();
             control.keybind.Keys = new string[3] { "CTRL", "ALT", "9" };
             control.command.values.Add(ShaderEnum.AutoDownscale);
@@ -123,7 +136,8 @@ namespace UnitTestProject1
             ControlManagement.UpdateControl(control, newControl);
 
             List<Control> cList = ControlManagement.GetControls();
-            Assert.IsTrue(cList.Contains(newControl) && !cList.Contains(control));
+            if(cList.Contains(newControl) && !cList.Contains(control)) { success = true; ControlManagement.DeleteControl(newControl); }
+            Assert.IsTrue(success);
         }
         [TestMethod]
         public void ControlManagementDeleteControlTest()
