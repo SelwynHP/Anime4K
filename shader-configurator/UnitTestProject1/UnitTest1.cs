@@ -23,6 +23,7 @@ namespace UnitTestProject1
         public void KeybindOutputFormatTest()
         {
             Keybind bind = new Keybind();
+            bind.Keys = new string[] { "CTRL", "ALT", "1" };
             string pattern = @"^((CTRL|ALT|SHIFT)\+){0,2}\w$";
             Assert.IsTrue(Regex.IsMatch(bind.Output(), pattern));
         }
@@ -30,6 +31,7 @@ namespace UnitTestProject1
         public void KeybindOutputRemoveNullEmptyTest()
         {
             Keybind kb = new Keybind();
+            kb.Keys = new string[] { "CTRL", "ALT", "1" };
             kb.Keys[1] = "EMPTY";
 
             string str = kb.Output();
@@ -80,6 +82,7 @@ namespace UnitTestProject1
         public void ControlOutputFormatTest()
         {
             Control control = new Control();
+            control.keybind.Keys = new string[3] { "CTRL", "ALT", "1" };
             control.command.values.Add(ShaderEnum.DarkLinesFast);
             control.command.values.Add(ShaderEnum.AutoDownscale);
             string pattern = @".+\sno-osd\schange-list\sglsl-shaders\sset\s"".+\.glsl""";

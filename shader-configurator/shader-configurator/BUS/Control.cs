@@ -121,5 +121,9 @@ namespace shader_configurator
             }
             return false;
         }
+        public override string ToString()
+        {
+            return this.Output();
+        }
     }
 }

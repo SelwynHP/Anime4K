@@ -64,17 +64,17 @@ namespace shader_configurator.DAL
                 }
             }
         }
-        public static void UpdateControl(Control control, Control newControl)
+        public static void UpdateControl(Control oldControl, Control newControl)
         {
             if (File.Exists(filepath))
             {
                 List<Control> cList = GetControls();
                 int i = -1;
-                i = cList.IndexOf(control);
+                i = cList.IndexOf(oldControl);
                 if(i != -1)
                 {
                     cList.Insert(i, newControl);
-                    cList.Remove(control);
+                    cList.Remove(oldControl);
 
                     using (StreamWriter sw = new StreamWriter(filepath, false))
                     {

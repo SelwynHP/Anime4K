@@ -47,11 +47,23 @@ namespace shader_configurator.GUI
         {
             textBoxPreview.Text = myControl.Output();
         }
+        public void SetControls()
+        {
+            textBoxBindings.Text = "";
+            listBoxShaders.Items.Clear();
+
+            textBoxBindings.Text = myControl.keybind.Output();
+            foreach(ShaderEnum element in myControl.command.values)
+            {
+                listBoxShaders.Items.Add(element);
+            }
+        }
         public void SetControlList()
         {
+            listBoxControls.Items.Clear();
             foreach(Control element in shader_configurator.DAL.ControlManagement.GetControls())
             {
-                listBoxControls.Items.Add(element.Output());
+                listBoxControls.Items.Add(element);
             }
         }
         public ControlManagement()
@@ -86,56 +98,90 @@ namespace shader_configurator.GUI
             }
             if(kb.Keys != new Keybind().Keys)
             {
-                textBoxBindings.Text = kb.Output();
+                myControl.keybind = kb;
             }
+            SetPreview();
+            SetControls();
         }
 
         private void buttonUnsetBinding_Click(object sender, EventArgs e)
         {
-            textBoxBindings.Text = "";
+            myControl.keybind.Keys = new string[] { "", "", "" };
+            SetPreview();
+            SetControls();
         }
 
         private void buttonSetShader_Click(object sender, EventArgs e)
         {
-            listBoxShaders.Items.Add(comboBoxShader.SelectedItem);
-
-            Command cmd = new Command();
-            foreach (ShaderEnum element in listBoxShaders.Items)
-            {
-                cmd.values.Add(element);
-            }
-
-            myControl.command = cmd;
+            myControl.command.values.Add((ShaderEnum)comboBoxShader.SelectedItem);
             SetPreview();
+            SetControls();
         }
 
         private void buttonUnsetShader_Click(object sender, EventArgs e)
         {
-            int index = listBoxShaders.SelectedIndex;
-            if(index > -1)
+            if(listBoxShaders.SelectedItem != null)
             {
-                listBoxShaders.Items.RemoveAt(index);
+                myControl.command.values.Remove((ShaderEnum)listBoxShaders.SelectedItem);
             }
-
-            Command cmd = new Command();
-            foreach (ShaderEnum element in listBoxShaders.Items)
-            {
-                cmd.values.Add(element);
-            }
-
-            myControl.command = cmd;
             SetPreview();
+            SetControls();
         }
 
         private void textBoxBindings_TextChanged(object sender, EventArgs e)
         {
-            Keybind kb = new Keybind(textBoxBindings.Text);
-            myControl.keybind = kb;
-            SetPreview();
         }
 
         private void listBoxShaders_ControlAdded(object sender, ControlEventArgs e)
         {
+        }
+
+        private void buttonClearShader_Click(object sender, EventArgs e)
+        {
+            myControl.command.values.Clear();
+            SetPreview();
+            SetControls();
+        }
+
+        private void buttonAddProfile_Click(object sender, EventArgs e)
+        {
+            if(myControl != null)
+            {
+                shader_configurator.DAL.ControlManagement.SetControl(myControl);
+            }
+            SetControlList();
+        }
+
+        private void buttonUpdateProfile_Click(object sender, EventArgs e)
+        {
+            Control oldControl = (Control)listBoxControls.SelectedItem;
+            if(oldControl != null)
+            {
+                shader_configurator.DAL.ControlManagement.UpdateControl(oldControl, myControl);
+            }
+            SetControlList();
+        }
+
+        private void listBoxControls_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Control selectedControl = (Control)listBoxControls.SelectedItem;
+            if(selectedControl != null)
+            {
+                myControl = new Control(selectedControl.Output());
+            }
+            SetPreview();
+            SetControls();
+
+        }
+
+        private void buttonDeleteProfile_Click(object sender, EventArgs e)
+        {
+            Control selectedControl = (Control)listBoxControls.SelectedItem;
+            if (selectedControl != null)
+            {
+                shader_configurator.DAL.ControlManagement.DeleteControl(selectedControl);
+            }
+            SetControlList();
         }
     }
 }

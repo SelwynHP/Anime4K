@@ -55,7 +55,7 @@ namespace shader_configurator
 
         public void Initialize()
         {
-            this.Keys = new string[3] { "CTRL", "ALT", "1" };
+            this.Keys = new string[3] { "", "", "" };
         }
         public string Output()
         {
