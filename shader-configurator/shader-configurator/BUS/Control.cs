@@ -17,24 +17,38 @@ namespace shader_configurator
 
         public Control(string v)
         {
-            if (IsValidControlString(v))
-            {
-                string kb;
-                string cmd;
-                string pattern = @"(.+)\s(no-osd change-list glsl-shaders set)\s("".+\.glsl"")";
-                Match match = Regex.Match(v, pattern);
-                if (match.Success)
-                {
-                    kb = match.Groups[1].ToString();
-                    cmd = match.Groups[3].ToString();
+            Initialize();
 
-                    this.keybind = new Keybind(kb);
-                    this.command = new Command(cmd);
-                }
-                else
-                {
-                    Initialize();
-                }
+            string kb, cmd, pattern;
+            Match match;
+            switch (IsValidControlString(v))
+            {
+                case -1:
+                    break;
+                case 0:
+                    pattern = @"(.+)\s(no-osd change-list glsl-shaders set)\s("".+\.glsl"")";
+                    match = Regex.Match(v, pattern);
+                    if (match.Success)
+                    {
+                        kb = match.Groups[1].ToString();
+                        cmd = match.Groups[3].ToString();
+
+                        this.keybind = new Keybind(kb);
+                        this.command = new Command(cmd);
+                    }
+                    break;
+                case 1:
+                    pattern = @"(.+)\s(no-osd change-list glsl-shaders clr\s"""";(?>\s.+)?)";
+                    match = Regex.Match(v, pattern);
+                    if (match.Success)
+                    {
+                        kb = match.Groups[1].ToString();
+                        cmd = match.Groups[2].ToString();
+
+                        this.keybind = new Keybind(kb);
+                        this.command.command_name = cmd;
+                    }
+                    break;
             }
         }
         public void Initialize()
@@ -42,15 +56,23 @@ namespace shader_configurator
             this.keybind = new Keybind();
             this.command = new Command();
         }
-        public bool IsValidControlString(string v)
+        public int IsValidControlString(string v)
         {
-            bool success = false;
+            int result = -1;
             string pattern = @"(.+)\s(no-osd change-list glsl-shaders set)\s("".+\.glsl"")";
+            string patternClear = @"(.+)\s(no-osd change-list glsl-shaders clr)\s("""");(?>\s.+)?";
             if (Regex.IsMatch(v, pattern))
             {
-                success = true;
+                result = 0;
             }
-            return success;
+            else
+            {
+                if (Regex.IsMatch(v, patternClear))
+                {
+                    result = 1;
+                }
+            }
+            return result;
         }
 
         public string Output()

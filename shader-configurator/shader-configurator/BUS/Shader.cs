@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace shader_configurator
 {
-    public class Shader
+    public static class Shader
     {
-        public string shaderDirectory = @"~~/shaders/";
+        public static string defaultShaderDirectory = @"~~/shaders/";
         public static Dictionary<ShaderEnum, string> shaders = new Dictionary<ShaderEnum, string>
         {
             { ShaderEnum.AutoDownscale, "Anime4K_Auto_Downscale_Pre_x4.glsl" },
@@ -42,7 +42,11 @@ namespace shader_configurator
             { ShaderEnum.UpscaleUltraDeblur, "Anime4K_Upscale_CNN_UL_x2_Deblur.glsl" },
             { ShaderEnum.UpscaleUltraDenoise, "Anime4K_Upscale_CNN_UL_x2_Denoise.glsl" }
         };
-        public string GetValue(ShaderEnum key)
+        public static string GetValue(ShaderEnum key)
+        {
+            return defaultShaderDirectory + shaders[key];
+        }
+        public static string GetValue(ShaderEnum key,string shaderDirectory)
         {
             return shaderDirectory + shaders[key];
         }

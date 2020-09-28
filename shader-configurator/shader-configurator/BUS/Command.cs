@@ -51,11 +51,25 @@ namespace shader_configurator
 
         public string ValueOutput()
         {
+            if(this.command_name == "no-osd change-list glsl-shaders clr \"\"; show-text \"GLSL shaders cleared\"")
+            {
+                return this.command_name;
+            }
             StringBuilder sb = new StringBuilder();
-            Shader s = new Shader();
             foreach(ShaderEnum element in this.values)
             {
-                sb.Append(s.GetValue(element));
+                sb.Append(Shader.GetValue(element));
+                sb.Append(";");
+            }
+            string str = @"""" + sb.ToString().TrimEnd(';') + @"""";
+            return this.command_name + " " + str;
+        }
+        public string ValueOutput(string shaderRootDirector)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (ShaderEnum element in this.values)
+            {
+                sb.Append(Shader.GetValue(element,shaderRootDirector));
                 sb.Append(";");
             }
             string str = @"""" + sb.ToString().TrimEnd(';') + @"""";

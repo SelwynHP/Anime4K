@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using shader_configurator.DAL;
 
 namespace shader_configurator.GUI
 {
@@ -35,6 +34,8 @@ namespace shader_configurator.GUI
             //-----
             textBoxBindings.ReadOnly = true;
             textBoxPreview.ReadOnly = true;
+            buttonUpdateProfile.Enabled = false;
+            buttonDeleteProfile.Enabled = false;
             SetControlList();
             //Set Default Values
             comboBoxBinding1.SelectedIndex = 1;
@@ -158,6 +159,8 @@ namespace shader_configurator.GUI
             if(oldControl != null)
             {
                 shader_configurator.DAL.ControlManagement.UpdateControl(oldControl, myControl);
+                buttonUpdateProfile.Enabled = false;
+                buttonDeleteProfile.Enabled = false;
             }
             SetControlList();
         }
@@ -168,6 +171,13 @@ namespace shader_configurator.GUI
             if(selectedControl != null)
             {
                 myControl = new Control(selectedControl.Output());
+                buttonUpdateProfile.Enabled = true;
+                buttonDeleteProfile.Enabled = true;
+            }
+            else
+            {
+                buttonUpdateProfile.Enabled = false;
+                buttonDeleteProfile.Enabled = false;
             }
             SetPreview();
             SetControls();
@@ -180,8 +190,18 @@ namespace shader_configurator.GUI
             if (selectedControl != null)
             {
                 shader_configurator.DAL.ControlManagement.DeleteControl(selectedControl);
+                buttonUpdateProfile.Enabled = false;
+                buttonDeleteProfile.Enabled = false;
             }
             SetControlList();
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBoxShaderRootDirectory.Text = folderBrowserDialog1.SelectedPath;
+            }
         }
     }
 }

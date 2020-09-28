@@ -26,6 +26,7 @@ namespace shader_configurator.DAL
                     str = sr.ReadLine();
                 }
             }
+            cList = cList.OrderBy(x => x.keybind.Output()).ToList();
             return cList;
         }
         public static void SetControl(Control control)
