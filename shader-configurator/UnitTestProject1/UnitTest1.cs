@@ -51,7 +51,6 @@ namespace UnitTestProject1
         public void CommandValueOutputTypeTest()
         {
             Command cmd = new Command();
-            Shader shader = new Shader();
             cmd.values.Add(ShaderEnum.DarkLinesFast);
             cmd.values.Add(ShaderEnum.DeblurMedium);
             cmd.values.Add(ShaderEnum.UpscaleOriginal);
@@ -61,7 +60,6 @@ namespace UnitTestProject1
         public void CommandValueOutputFormatTest()
         {
             Command cmd = new Command();
-            Shader shader = new Shader();
             cmd.values.Add(ShaderEnum.DarkLinesFast);
             cmd.values.Add(ShaderEnum.DeblurMedium);
             cmd.values.Add(ShaderEnum.UpscaleOriginal);
@@ -175,8 +173,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void ShaderGetValueTest()
         {
-            Shader shader = new Shader();
-            Assert.AreEqual(typeof(string), shader.GetValue(ShaderEnum.AutoDownscale).GetType());
+            Assert.AreEqual(typeof(string), Shader.GetValue(ShaderEnum.AutoDownscale).GetType());
         }
     }
     [TestClass]
