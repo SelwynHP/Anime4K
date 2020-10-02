@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="shader-configurator.exe" version="1.0.0.1" publicKeyToken="3ac45dc69e46517c" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="shader-configurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="shader-configurator.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="shader-configurator.exe" size="30680">
+      <assemblyIdentity name="shader-configurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>c8UVw4E3gQ/PTI2+9q0PEP6ZZ01crXPSFPB+3DorBr0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="shader-configurator.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=BLACKCASTLE\HayatoS" issuerKeyHash="e636ab47ddaa270eaffafd6844e6b1f1ad53a0ce" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>KxdQBEo2B5P1tPjiKh84bUukiAF7ZW/wi2afHj+srlA=</DigestValue></Reference></SignedInfo><SignatureValue>L36UwyZqLgpEBLS7behPp0OErwVvlfx8vBp4/TMfed+/alO8rKdCNxnWWH23OqNmm9odlL5cgg0W+r5sdsrgGwVuSmvkrRZtJ6ibYlPGn+E7bDgChSdakY6zLfyXG/FeUDGWLFj9/3D7ZVc/sWRkKnF4O6xqjhK2OHjbL1XslLY=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>2rzfGqNl/TBN36PRDCf4fZlS+Z5IpA+Fan0/sS7N2RRXGx4rEXlAjpY1q7VQh8BwwuNAzZ3NpS3la9+Y1aC0oIvbTDFtZoC3WEVm/l6dju51mJt89xkRPF7eHEkf80Vo6HyUI11wDLHlKUGzT/Hwkl/vwMDghWs75CpWGhWrgnk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="50aeac3f1e9f668bf06f657b0188a44b6d381f2ae2f8b4f59307364a0450172b" Description="" Url=""><as:assemblyIdentity name="shader-configurator.exe" version="1.0.0.1" publicKeyToken="3ac45dc69e46517c" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=BLACKCASTLE\HayatoS</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>o5GatIUxyab3YZWujtnSp2lf+7nYpQGjKauZwkPBrW0=</DigestValue></Reference></SignedInfo><SignatureValue>XgIyYndIVyb8CKSQ/oNQBrXAxhj9xwo4ZhSz8l3oEhcb8RurFmEF+GNMyTLUL/fyy2/fOVdOx7IV3vxvKtP3+YcxZ4UoJKsjWRHsewtpNz4gwsx20jwUFEVlk9aRZlj7fq/gPVMhAxSU7AwoFj272p6n1NK15fOQ4mbCe1lnkBo=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>2rzfGqNl/TBN36PRDCf4fZlS+Z5IpA+Fan0/sS7N2RRXGx4rEXlAjpY1q7VQh8BwwuNAzZ3NpS3la9+Y1aC0oIvbTDFtZoC3WEVm/l6dju51mJt89xkRPF7eHEkf80Vo6HyUI11wDLHlKUGzT/Hwkl/vwMDghWs75CpWGhWrgnk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB5TCCAU6gAwIBAgIQKF/tmmvQL6dF44IwKg0ivzANBgkqhkiG9w0BAQsFADAxMS8wLQYDVQQDHiYAQgBMAEEAQwBLAEMAQQBTAFQATABFAFwASABhAHkAYQB0AG8AUzAeFw0yMDA5MjcyMDMxMDlaFw0yMTA5MjgwMjMxMDlaMDExLzAtBgNVBAMeJgBCAEwAQQBDAEsAQwBBAFMAVABMAEUAXABIAGEAeQBhAHQAbwBTMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDavN8ao2X9ME3fo9EMJ/h9mVL5nkikD4VqfT+xLs3ZFFcbHisReUCOljWrtVCHwHDC40DNnc2lLeVr35jVoLSgi9tMMW1mgLdYRWb+Xp2O7nWYm3z3GRE8Xt4cSR/zRWjofJQjXXAMseUpQbNP8fCSX+/AwOCFazvkKlYaFauCeQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAG1IMvZ4/AabgD9jz9qYgVR+6N4vaEZAgQGRaDGkxFdk/vImtOCrI6WzXuPZvNcwuB0JWzEoGSjHCu5LIEUYjb3tYB0SCJDNWbtIaXdzKbRjosFPrkCbqI7ALb9fHFMkKJE4pdzorpn2laChj0ia/BdTkPOhKWOxRzldV1np6QKa</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
