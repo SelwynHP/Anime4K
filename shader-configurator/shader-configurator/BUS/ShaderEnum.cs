@@ -2,6 +2,10 @@
 {
     public enum ShaderEnum
     {
+        ACNet,
+        ACNetHDN1,
+        ACNetHDN2,
+        ACNetHDN3,
         AutoDownscale,
         ThinLinesFast,
         ThinLinesVeryFast,

@@ -9,6 +9,10 @@ namespace shader_configurator
         public static string defaultShaderDirectory = @"~~/shaders/";
         public static Dictionary<ShaderEnum, string> shaders = new Dictionary<ShaderEnum, string>
         {
+            { ShaderEnum.ACNet, "ACNet.glsl" },
+            { ShaderEnum.ACNetHDN1, "ACNet_HDN_L1.glsl" },
+            { ShaderEnum.ACNetHDN2, "ACNet_HDN_L2.glsl" },
+            { ShaderEnum.ACNetHDN3, "ACNet_HDN_L3.glsl" },
             { ShaderEnum.AutoDownscale, "Anime4K_Auto_Downscale_Pre_x4.glsl" },
             { ShaderEnum.ThinLinesFast, "Anime4K_ThinLines_Fast.glsl" },
             { ShaderEnum.ThinLinesVeryFast, "Anime4K_ThinLines_VeryFast.glsl" },
