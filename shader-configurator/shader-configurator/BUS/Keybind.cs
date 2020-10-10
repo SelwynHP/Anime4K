@@ -11,7 +11,8 @@ namespace shader_configurator
         EMPTY,
         CTRL,
         SHIFT,
-        ALT
+        ALT,
+        META
     }
     public class Keybind
     {
@@ -25,21 +26,15 @@ namespace shader_configurator
         public Keybind(string kb)
         {
             this.Initialize();
-            string pattern = @"\+?(CTRL|ALT|SHIFT|[0-9])";
+            string pattern = @"\+?(CTRL|ALT|SHIFT|META|[0-9])";
             MatchCollection collection = Regex.Matches(kb, pattern);
-            string[] keys = new string[3];
+            string[] keys = new string[2];
 
             switch (collection.Count)
             {
                 case 2:
-                    keys[0] = "";
-                    keys[1] = collection[0].Groups[1].ToString();
-                    keys[2] = collection[1].Groups[1].ToString();
-                    break;
-                case 3:
                     keys[0] = collection[0].Groups[1].ToString();
                     keys[1] = collection[1].Groups[1].ToString();
-                    keys[2] = collection[2].Groups[1].ToString();
                     break;
             }
             this.Keys = keys;
@@ -55,7 +50,7 @@ namespace shader_configurator
 
         public void Initialize()
         {
-            this.Keys = new string[3] { "", "", "" };
+            this.Keys = new string[2] { "", "" };
         }
         public string Output()
         {

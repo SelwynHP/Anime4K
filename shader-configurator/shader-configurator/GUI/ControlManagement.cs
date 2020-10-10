@@ -22,7 +22,6 @@ namespace shader_configurator.GUI
             foreach (KeybindEnum element in Enum.GetValues(typeof(KeybindEnum)))
             {
                 comboBoxBinding1.Items.Add(element);
-                comboBoxBinding2.Items.Add(element);
             }
             //-----
             comboBoxCommand.Enabled = false;
@@ -39,7 +38,6 @@ namespace shader_configurator.GUI
             SetControlList();
             //Set Default Values
             comboBoxBinding1.SelectedIndex = 1;
-            comboBoxBinding2.SelectedIndex = 2;
             textBoxBinding3.Text = "1";
             comboBoxCommand.Text = "Default";
             comboBoxShader.SelectedIndex = 0;
@@ -51,9 +49,11 @@ namespace shader_configurator.GUI
         public void SetControls()
         {
             textBoxBindings.Text = "";
+            textBoxComment.Text = "";
             listBoxShaders.Items.Clear();
 
             textBoxBindings.Text = myControl.keybind.Output();
+            textBoxComment.Text = myControl.Comment;
             foreach(ShaderEnum element in myControl.command.values)
             {
                 listBoxShaders.Items.Add(element);
@@ -79,8 +79,7 @@ namespace shader_configurator.GUI
             try
             {
                 kb.Keys[0] = comboBoxBinding1.SelectedItem.ToString();
-                kb.Keys[1] = comboBoxBinding2.SelectedItem.ToString();
-                kb.Keys[2] = textBoxBinding3.Text;
+                kb.Keys[1] = textBoxBinding3.Text;
                 foreach(string key in kb.Keys)
                 {
                     if (String.IsNullOrEmpty(key))
@@ -107,7 +106,7 @@ namespace shader_configurator.GUI
 
         private void buttonUnsetBinding_Click(object sender, EventArgs e)
         {
-            myControl.keybind.Keys = new string[] { "", "", "" };
+            myControl.keybind.Keys = new string[] { "", "" };
             SetPreview();
             SetControls();
         }
@@ -202,6 +201,18 @@ namespace shader_configurator.GUI
             {
                 textBoxShaderRootDirectory.Text = folderBrowserDialog1.SelectedPath;
             }
+        }
+
+        private void buttonSetComment_Click(object sender, EventArgs e)
+        {
+            myControl.Comment = textBoxComment.Text;
+        }
+
+        private void buttonUnsetComment_Click(object sender, EventArgs e)
+        {
+            myControl.Comment = "";
+            SetPreview();
+            SetControls();
         }
     }
 }

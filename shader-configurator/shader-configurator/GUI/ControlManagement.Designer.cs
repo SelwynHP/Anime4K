@@ -44,15 +44,17 @@
             this.buttonSetBinding = new System.Windows.Forms.Button();
             this.textBoxBindings = new System.Windows.Forms.TextBox();
             this.comboBoxCommand = new System.Windows.Forms.ComboBox();
-            this.comboBoxBinding2 = new System.Windows.Forms.ComboBox();
             this.listBoxControls = new System.Windows.Forms.ListBox();
             this.comboBoxBinding1 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBoxShaderRootDirectory = new System.Windows.Forms.TextBox();
-            this.buttonApply = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.buttonBrowse = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonApply = new System.Windows.Forms.Button();
+            this.textBoxShaderRootDirectory = new System.Windows.Forms.TextBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.buttonUnsetComment = new System.Windows.Forms.Button();
+            this.buttonSetComment = new System.Windows.Forms.Button();
+            this.textBoxComment = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -70,6 +72,9 @@
             // 
             // TabPage1
             // 
+            this.TabPage1.Controls.Add(this.textBoxComment);
+            this.TabPage1.Controls.Add(this.buttonUnsetComment);
+            this.TabPage1.Controls.Add(this.buttonSetComment);
             this.TabPage1.Controls.Add(this.buttonDeleteProfile);
             this.TabPage1.Controls.Add(this.buttonUpdateProfile);
             this.TabPage1.Controls.Add(this.buttonAddProfile);
@@ -84,7 +89,6 @@
             this.TabPage1.Controls.Add(this.buttonSetBinding);
             this.TabPage1.Controls.Add(this.textBoxBindings);
             this.TabPage1.Controls.Add(this.comboBoxCommand);
-            this.TabPage1.Controls.Add(this.comboBoxBinding2);
             this.TabPage1.Controls.Add(this.listBoxControls);
             this.TabPage1.Controls.Add(this.comboBoxBinding1);
             this.TabPage1.Location = new System.Drawing.Point(4, 22);
@@ -97,7 +101,7 @@
             // 
             // buttonDeleteProfile
             // 
-            this.buttonDeleteProfile.Location = new System.Drawing.Point(287, 65);
+            this.buttonDeleteProfile.Location = new System.Drawing.Point(287, 85);
             this.buttonDeleteProfile.Name = "buttonDeleteProfile";
             this.buttonDeleteProfile.Size = new System.Drawing.Size(112, 23);
             this.buttonDeleteProfile.TabIndex = 21;
@@ -107,7 +111,7 @@
             // 
             // buttonUpdateProfile
             // 
-            this.buttonUpdateProfile.Location = new System.Drawing.Point(287, 94);
+            this.buttonUpdateProfile.Location = new System.Drawing.Point(287, 112);
             this.buttonUpdateProfile.Name = "buttonUpdateProfile";
             this.buttonUpdateProfile.Size = new System.Drawing.Size(112, 23);
             this.buttonUpdateProfile.TabIndex = 20;
@@ -117,7 +121,7 @@
             // 
             // buttonAddProfile
             // 
-            this.buttonAddProfile.Location = new System.Drawing.Point(287, 123);
+            this.buttonAddProfile.Location = new System.Drawing.Point(287, 141);
             this.buttonAddProfile.Name = "buttonAddProfile";
             this.buttonAddProfile.Size = new System.Drawing.Size(112, 23);
             this.buttonAddProfile.TabIndex = 19;
@@ -138,9 +142,9 @@
             // listBoxShaders
             // 
             this.listBoxShaders.FormattingEnabled = true;
-            this.listBoxShaders.Location = new System.Drawing.Point(405, 90);
+            this.listBoxShaders.Location = new System.Drawing.Point(405, 82);
             this.listBoxShaders.Name = "listBoxShaders";
-            this.listBoxShaders.Size = new System.Drawing.Size(233, 56);
+            this.listBoxShaders.Size = new System.Drawing.Size(233, 82);
             this.listBoxShaders.TabIndex = 17;
             this.listBoxShaders.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.listBoxShaders_ControlAdded);
             // 
@@ -183,7 +187,7 @@
             // 
             // textBoxPreview
             // 
-            this.textBoxPreview.Location = new System.Drawing.Point(56, 154);
+            this.textBoxPreview.Location = new System.Drawing.Point(56, 170);
             this.textBoxPreview.Name = "textBoxPreview";
             this.textBoxPreview.Size = new System.Drawing.Size(582, 20);
             this.textBoxPreview.TabIndex = 12;
@@ -208,10 +212,10 @@
             // 
             // textBoxBindings
             // 
-            this.textBoxBindings.Location = new System.Drawing.Point(56, 90);
+            this.textBoxBindings.Location = new System.Drawing.Point(56, 87);
             this.textBoxBindings.Multiline = true;
             this.textBoxBindings.Name = "textBoxBindings";
-            this.textBoxBindings.Size = new System.Drawing.Size(225, 56);
+            this.textBoxBindings.Size = new System.Drawing.Size(225, 21);
             this.textBoxBindings.TabIndex = 7;
             this.textBoxBindings.TextChanged += new System.EventHandler(this.textBoxBindings_TextChanged);
             // 
@@ -223,18 +227,10 @@
             this.comboBoxCommand.Size = new System.Drawing.Size(112, 21);
             this.comboBoxCommand.TabIndex = 6;
             // 
-            // comboBoxBinding2
-            // 
-            this.comboBoxBinding2.FormattingEnabled = true;
-            this.comboBoxBinding2.Location = new System.Drawing.Point(133, 31);
-            this.comboBoxBinding2.Name = "comboBoxBinding2";
-            this.comboBoxBinding2.Size = new System.Drawing.Size(71, 21);
-            this.comboBoxBinding2.TabIndex = 4;
-            // 
             // listBoxControls
             // 
             this.listBoxControls.FormattingEnabled = true;
-            this.listBoxControls.Location = new System.Drawing.Point(56, 179);
+            this.listBoxControls.Location = new System.Drawing.Point(56, 195);
             this.listBoxControls.Name = "listBoxControls";
             this.listBoxControls.Size = new System.Drawing.Size(582, 121);
             this.listBoxControls.TabIndex = 3;
@@ -243,9 +239,9 @@
             // comboBoxBinding1
             // 
             this.comboBoxBinding1.FormattingEnabled = true;
-            this.comboBoxBinding1.Location = new System.Drawing.Point(56, 31);
+            this.comboBoxBinding1.Location = new System.Drawing.Point(56, 32);
             this.comboBoxBinding1.Name = "comboBoxBinding1";
-            this.comboBoxBinding1.Size = new System.Drawing.Size(71, 21);
+            this.comboBoxBinding1.Size = new System.Drawing.Size(148, 21);
             this.comboBoxBinding1.TabIndex = 0;
             // 
             // tabPage2
@@ -262,21 +258,15 @@
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBoxShaderRootDirectory
+            // buttonBrowse
             // 
-            this.textBoxShaderRootDirectory.Location = new System.Drawing.Point(97, 40);
-            this.textBoxShaderRootDirectory.Name = "textBoxShaderRootDirectory";
-            this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(397, 20);
-            this.textBoxShaderRootDirectory.TabIndex = 0;
-            // 
-            // buttonApply
-            // 
-            this.buttonApply.Location = new System.Drawing.Point(419, 271);
-            this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(75, 23);
-            this.buttonApply.TabIndex = 1;
-            this.buttonApply.Text = "Apply";
-            this.buttonApply.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Location = new System.Drawing.Point(500, 40);
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Size = new System.Drawing.Size(75, 20);
+            this.buttonBrowse.TabIndex = 3;
+            this.buttonBrowse.Text = "Browse";
+            this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
             // label1
             // 
@@ -287,15 +277,49 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Shader Root Directory";
             // 
-            // buttonBrowse
+            // buttonApply
             // 
-            this.buttonBrowse.Location = new System.Drawing.Point(500, 40);
-            this.buttonBrowse.Name = "buttonBrowse";
-            this.buttonBrowse.Size = new System.Drawing.Size(75, 20);
-            this.buttonBrowse.TabIndex = 3;
-            this.buttonBrowse.Text = "Browse";
-            this.buttonBrowse.UseVisualStyleBackColor = true;
-            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
+            this.buttonApply.Location = new System.Drawing.Point(419, 271);
+            this.buttonApply.Name = "buttonApply";
+            this.buttonApply.Size = new System.Drawing.Size(75, 23);
+            this.buttonApply.TabIndex = 1;
+            this.buttonApply.Text = "Apply";
+            this.buttonApply.UseVisualStyleBackColor = true;
+            // 
+            // textBoxShaderRootDirectory
+            // 
+            this.textBoxShaderRootDirectory.Location = new System.Drawing.Point(97, 40);
+            this.textBoxShaderRootDirectory.Name = "textBoxShaderRootDirectory";
+            this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(397, 20);
+            this.textBoxShaderRootDirectory.TabIndex = 0;
+            // 
+            // buttonUnsetComment
+            // 
+            this.buttonUnsetComment.Location = new System.Drawing.Point(174, 141);
+            this.buttonUnsetComment.Name = "buttonUnsetComment";
+            this.buttonUnsetComment.Size = new System.Drawing.Size(107, 23);
+            this.buttonUnsetComment.TabIndex = 23;
+            this.buttonUnsetComment.Text = "Unset Comment";
+            this.buttonUnsetComment.UseVisualStyleBackColor = true;
+            this.buttonUnsetComment.Click += new System.EventHandler(this.buttonUnsetComment_Click);
+            // 
+            // buttonSetComment
+            // 
+            this.buttonSetComment.Location = new System.Drawing.Point(56, 141);
+            this.buttonSetComment.Name = "buttonSetComment";
+            this.buttonSetComment.Size = new System.Drawing.Size(107, 23);
+            this.buttonSetComment.TabIndex = 22;
+            this.buttonSetComment.Text = "Set Comment";
+            this.buttonSetComment.UseVisualStyleBackColor = true;
+            this.buttonSetComment.Click += new System.EventHandler(this.buttonSetComment_Click);
+            // 
+            // textBoxComment
+            // 
+            this.textBoxComment.Location = new System.Drawing.Point(56, 114);
+            this.textBoxComment.Multiline = true;
+            this.textBoxComment.Name = "textBoxComment";
+            this.textBoxComment.Size = new System.Drawing.Size(225, 21);
+            this.textBoxComment.TabIndex = 24;
             // 
             // ControlManagement
             // 
@@ -327,7 +351,6 @@
         private System.Windows.Forms.Button buttonSetBinding;
         private System.Windows.Forms.TextBox textBoxBindings;
         private System.Windows.Forms.ComboBox comboBoxCommand;
-        private System.Windows.Forms.ComboBox comboBoxBinding2;
         private System.Windows.Forms.ListBox listBoxControls;
         private System.Windows.Forms.ComboBox comboBoxBinding1;
         private System.Windows.Forms.TextBox textBoxBinding3;
@@ -341,5 +364,8 @@
         private System.Windows.Forms.TextBox textBoxShaderRootDirectory;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button buttonBrowse;
+        private System.Windows.Forms.TextBox textBoxComment;
+        private System.Windows.Forms.Button buttonUnsetComment;
+        private System.Windows.Forms.Button buttonSetComment;
     }
 }
