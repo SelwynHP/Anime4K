@@ -60,6 +60,7 @@ namespace UnitTestProject1
         public void CommandValueOutputFormatTest()
         {
             Command cmd = new Command();
+            cmd.command_name = "no-osd change-list glsl-shaders set";
             cmd.values.Add(ShaderEnum.DarkLinesFast);
             cmd.values.Add(ShaderEnum.DeblurMedium);
             cmd.values.Add(ShaderEnum.UpscaleOriginal);
@@ -77,14 +78,43 @@ namespace UnitTestProject1
             Assert.AreEqual(typeof(string), control.Output().GetType());
         }
         [TestMethod]
-        public void ControlOutputFormatTest()
+        public void ControlOutputFormatTestRange()
         {
-            Control control = new Control();
-            control.keybind.Keys = new string[3] { "CTRL", "ALT", "1" };
-            control.command.values.Add(ShaderEnum.DarkLinesFast);
-            control.command.values.Add(ShaderEnum.AutoDownscale);
-            string pattern = @".+\sno-osd\schange-list\sglsl-shaders\sset\s"".+\.glsl""";
-            Assert.IsTrue(Regex.IsMatch(control.Output(), pattern));
+            bool success = true;
+            string[] input = new string[]
+            {
+                @"CTRL+1 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 480/720p (Faithful)""",
+                @"CTRL+2 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 480/720p (Perceptual Quality)""",
+                @"CTRL+3 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_Deblur_DoG.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 480/720p (Perceptual Quality and Deblur)""",
+                @"CTRL+4 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 1080p (Faithful)""",
+                @"CTRL+5 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 1080p (Perceptual Quality)""",
+                @"CTRL+6 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_Deblur_DoG.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 1080p (Perceptual Quality and Deblur)""",
+                @"CTRL+0 no-osd change-list glsl-shaders clr """"; show-text ""GLSL shaders cleared""",
+                @"CTRL+1 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl",
+                @"CTRL+2 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl",
+                @"CTRL+3 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_Deblur_DoG.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl",
+                @"CTRL+4 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl",
+                @"CTRL+5 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl",
+                @"CTRL+6 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_Deblur_DoG.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl",
+                @"CTRL+0 no-osd change-list glsl-shaders clr """""
+            };
+            
+            foreach(string str in input)
+            {
+                if(!ControlOutputFormatTest(new Control(str)))
+                {
+                    Assert.IsTrue(success);
+                    break;
+                }
+            }
+            Assert.IsTrue(success);
+        }
+        public bool ControlOutputFormatTest(Control control)
+        {
+            bool match = false;
+            string pattern = @"((?>CTRL|SHIFT|ALT|META)+\+[0-9])\s(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")(?>; show-text ""([^""]*)"")?";
+            match = Regex.IsMatch(control.Output(), pattern);
+            return match;
         }
         [TestMethod]
         public void ControlInputFormatTest()
@@ -103,7 +133,8 @@ namespace UnitTestProject1
             bool success = false;
             //Control Initialization
             Control control = new Control();
-            control.keybind.Keys = new string[3] { "", "SHIFT", "2" };
+            control.keybind.Keys = new string[2] { "SHIFT", "2" };
+            control.command.command_name = "no-osd change-list glsl-shaders set";
             control.command.values.Add(ShaderEnum.AutoDownscale);
             control.command.values.Add(ShaderEnum.DarkLinesHQ);
             control.command.values.Add(ShaderEnum.ResamplingArtifactLarge);
@@ -111,7 +142,7 @@ namespace UnitTestProject1
 
             ControlManagement.SetControl(control);
             List<Control> cList = ControlManagement.GetControls();
-            if (control.Equals(cList.Last())) { success = true; ControlManagement.DeleteControl(control); }
+            if (cList.Contains(control)) { success = true; ControlManagement.DeleteControl(control); }
             Assert.IsTrue(success);
         }
         [TestMethod]
@@ -120,7 +151,8 @@ namespace UnitTestProject1
             bool success = false;
 
             Control control = new Control();
-            control.keybind.Keys = new string[3] { "CTRL", "ALT", "9" };
+            control.keybind.Keys = new string[2] { "CTRL", "9" };
+            control.command.command_name = "no-osd change-list glsl-shaders set";
             control.command.values.Add(ShaderEnum.AutoDownscale);
             control.command.values.Add(ShaderEnum.DarkLinesHQ);
             control.command.values.Add(ShaderEnum.ResamplingArtifactLarge);
@@ -128,7 +160,8 @@ namespace UnitTestProject1
             ControlManagement.SetControl(control);
 
             Control newControl = new Control();
-            newControl.keybind.Keys = new string[3] { "SHIFT", "ALT", "0" };
+            newControl.keybind.Keys = new string[2] { "SHIFT", "0" };
+            newControl.command.command_name = "no-osd change-list glsl-shaders set";
             newControl.command.values.Add(ShaderEnum.AutoDownscale);
             newControl.command.values.Add(ShaderEnum.DeblurLarge);
             newControl.command.values.Add(ShaderEnum.UpscaleOriginal);
@@ -144,7 +177,8 @@ namespace UnitTestProject1
         public void ControlManagementDeleteControlTest()
         {
             Control control = new Control();
-            control.keybind.Keys = new string[3] { "CTRL", "SHIFT", "7" };
+            control.keybind.Keys = new string[2] { "CTRL", "7" };
+            control.command.command_name = "no-osd change-list glsl-shaders set";
             control.command.values.Add(ShaderEnum.AutoDownscale);
             control.command.values.Add(ShaderEnum.DarkLinesHQ);
             control.command.values.Add(ShaderEnum.ResamplingArtifactLarge);

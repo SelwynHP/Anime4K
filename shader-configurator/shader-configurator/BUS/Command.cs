@@ -20,6 +20,7 @@ namespace shader_configurator
         public Command(string cmd)
         {
             Initialize();
+            this.command_name = "no-osd change-list glsl-shaders set";
             if (IsValidCommandString(cmd))
             {
                 string[] line = cmd.Replace("~~/shaders/","").Trim('"').Split(';');
@@ -29,10 +30,16 @@ namespace shader_configurator
                 }
             }
         }
+
+        public Command(string cmdName, string cmd) : this(cmd)
+        {
+            this.command_name = cmdName;
+        }
+
         public bool IsValidCommandString(string v)
         {
             bool success = false;
-            string pattern = @""".+.glsl(?>;.+.glsl)*""";
+            string pattern = @".+.glsl(?>;.+.glsl)*";
             if (Regex.IsMatch(v, pattern))
             {
                 success = true;
@@ -41,7 +48,7 @@ namespace shader_configurator
         }
         public void Initialize()
         {
-            this.command_name = "no-osd change-list glsl-shaders set";
+            this.command_name = "";
             this.values = new List<ShaderEnum>();
         }
         public string Output()
@@ -51,10 +58,6 @@ namespace shader_configurator
 
         public string ValueOutput()
         {
-            if(this.command_name == "no-osd change-list glsl-shaders clr \"\"; show-text \"GLSL shaders cleared\"")
-            {
-                return this.command_name;
-            }
             StringBuilder sb = new StringBuilder();
             foreach(ShaderEnum element in this.values)
             {

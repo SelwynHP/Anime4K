@@ -9,6 +9,7 @@ namespace shader_configurator
     {
         public Keybind keybind;
         public Command command;
+        public string Comment { get; set; }
 
         public Control()
         {
@@ -19,34 +20,29 @@ namespace shader_configurator
         {
             Initialize();
 
-            string kb, cmd, pattern;
+            string kb,cmdName, cmd, cmt, pattern;
             Match match;
             switch (IsValidControlString(v))
             {
                 case -1:
                     break;
                 case 0:
-                    pattern = @"(.+)\s(no-osd change-list glsl-shaders set)\s("".+\.glsl"")";
+                    pattern = @"((?>CTRL|SHIFT|ALT|META)+\+[0-9])\s(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")(?>; show-text ""([^""]*)"")?";
                     match = Regex.Match(v, pattern);
                     if (match.Success)
                     {
                         kb = match.Groups[1].ToString();
+                        cmdName = match.Groups[2].ToString();
                         cmd = match.Groups[3].ToString();
+                        try
+                        {
+                            cmt = match.Groups[4].ToString();
+                        }
+                        catch { cmt = ""; }
 
                         this.keybind = new Keybind(kb);
-                        this.command = new Command(cmd);
-                    }
-                    break;
-                case 1:
-                    pattern = @"(.+)\s(no-osd change-list glsl-shaders clr\s"""";(?>\s.+)?)";
-                    match = Regex.Match(v, pattern);
-                    if (match.Success)
-                    {
-                        kb = match.Groups[1].ToString();
-                        cmd = match.Groups[2].ToString();
-
-                        this.keybind = new Keybind(kb);
-                        this.command.command_name = cmd;
+                        this.command = new Command(cmdName,cmd);
+                        this.Comment = cmt;
                     }
                     break;
             }
@@ -59,26 +55,37 @@ namespace shader_configurator
         public int IsValidControlString(string v)
         {
             int result = -1;
-            string pattern = @"(.+)\s(no-osd change-list glsl-shaders set)\s("".+\.glsl"")";
-            string patternClear = @"(.+)\s(no-osd change-list glsl-shaders clr)\s("""");(?>\s.+)?";
+            string pattern = @"((?>CTRL|SHIFT|ALT|META)+\+[0-9])\s(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")(?>; show-text ""([^""]*)"")?";
             if (Regex.IsMatch(v, pattern))
             {
                 result = 0;
             }
             else
             {
-                if (Regex.IsMatch(v, patternClear))
-                {
-                    result = 1;
-                }
+                return result;
             }
             return result;
         }
 
         public string Output()
         {
-            return keybind.Output() + " " + command.ValueOutput();
+            string str = keybind.Output() + " " + command.ValueOutput();
+            if (String.IsNullOrEmpty(Comment))
+            {
+                return str;
+            }
+            else
+            {
+                str += @"; show-text " + OuputComment();
+                return str;
+            }
         }
+
+        public string OuputComment()
+        {
+            return @"""" + Comment + @"""";
+        }
+
         static bool ArraysEqual<T>(T[] a1, T[] a2)
         {
             if (ReferenceEquals(a1, a2))
@@ -137,7 +144,8 @@ namespace shader_configurator
             }
             if (ArraysEqual(this.keybind.Keys, c.keybind.Keys)
                 && this.command.command_name == c.command.command_name
-                && ScrambledEquals(this.command.values, c.command.values))
+                && ScrambledEquals(this.command.values, c.command.values)
+                && this.Comment == c.Comment)
             {
                 return true;
             }
