@@ -27,7 +27,7 @@ namespace shader_configurator
                 case -1:
                     break;
                 case 0:
-                    pattern = @"((?>CTRL|SHIFT|ALT|META)+\+[0-9])\s(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")(?>; show-text ""([^""]*)"")?";
+                    pattern = @"((?>CTRL|SHIFT|ALT|META)+\+[0-9|a-z])\s(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")(?>; show-text ""([^""]*)"")?";
                     match = Regex.Match(v, pattern);
                     if (match.Success)
                     {
@@ -55,7 +55,7 @@ namespace shader_configurator
         public int IsValidControlString(string v)
         {
             int result = -1;
-            string pattern = @"((?>CTRL|SHIFT|ALT|META)+\+[0-9])\s(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")(?>; show-text ""([^""]*)"")?";
+            string pattern = @"((?>CTRL|SHIFT|ALT|META)+\+[0-9|a-z])\s(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")(?>; show-text ""([^""]*)"")?";
             if (Regex.IsMatch(v, pattern))
             {
                 result = 0;

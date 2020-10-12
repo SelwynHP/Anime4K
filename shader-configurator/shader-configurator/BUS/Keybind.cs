@@ -26,7 +26,7 @@ namespace shader_configurator
         public Keybind(string kb)
         {
             this.Initialize();
-            string pattern = @"\+?(CTRL|ALT|SHIFT|META|[0-9])";
+            string pattern = @"\+?(CTRL|ALT|SHIFT|META|[0-9|a-z])";
             MatchCollection collection = Regex.Matches(kb, pattern);
             string[] keys = new string[2];
 
