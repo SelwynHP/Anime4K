@@ -41,6 +41,7 @@ namespace shader_configurator.GUI
             textBoxBinding3.Text = "1";
             comboBoxCommand.Text = "Default";
             comboBoxShader.SelectedIndex = 0;
+            if(comboBoxCommand.Text == "Default") { myControl.command.command_name = "no-osd change-list glsl-shaders set"; }
         }
         public void SetPreview()
         {
@@ -78,15 +79,8 @@ namespace shader_configurator.GUI
             Keybind kb = new Keybind();
             try
             {
-                kb.Keys[0] = comboBoxBinding1.SelectedItem.ToString();
-                kb.Keys[1] = textBoxBinding3.Text;
-                foreach(string key in kb.Keys)
-                {
-                    if (String.IsNullOrEmpty(key))
-                    {
-                        throw new ArgumentOutOfRangeException();
-                    }
-                }
+                kb.firstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum),comboBoxBinding1.SelectedItem.ToString());
+                kb.secondKey = textBoxBinding3.Text;
             }
             catch(NullReferenceException nre)
             {
@@ -96,7 +90,7 @@ namespace shader_configurator.GUI
             {
                 MessageBox.Show("An error has occured while capturing binding. Please try again.\n" + ex.Message, "Error");
             }
-            if(kb.Keys != new Keybind().Keys)
+            if(kb != new Keybind())
             {
                 myControl.keybind = kb;
             }
@@ -106,7 +100,8 @@ namespace shader_configurator.GUI
 
         private void buttonUnsetBinding_Click(object sender, EventArgs e)
         {
-            myControl.keybind.Keys = new string[] { "", "" };
+            myControl.keybind.firstKey = KeybindEnum.EMPTY;
+            myControl.keybind.secondKey = "";
             SetPreview();
             SetControls();
         }
@@ -206,11 +201,15 @@ namespace shader_configurator.GUI
         private void buttonSetComment_Click(object sender, EventArgs e)
         {
             myControl.Comment = textBoxComment.Text;
+            textBoxComment.ReadOnly = true;
+            SetPreview();
+            SetControls();
         }
 
         private void buttonUnsetComment_Click(object sender, EventArgs e)
         {
             myControl.Comment = "";
+            textBoxComment.ReadOnly = false;
             SetPreview();
             SetControls();
         }

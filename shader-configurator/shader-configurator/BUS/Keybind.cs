@@ -1,4 +1,5 @@
-﻿using System;
+﻿using shader_configurator.VAL;
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,30 +17,31 @@ namespace shader_configurator
     }
     public class Keybind
     {
-        public string[] Keys{ get; set; }
+        public KeybindEnum firstKey;
+        public string secondKey;
 
         public Keybind()
         {
-            this.Initialize();
+            this.firstKey = KeybindEnum.EMPTY;
+            this.secondKey = "";
         }
-
-        public Keybind(string kb)
+        public Keybind(string kb) : this()
         {
-            this.Initialize();
-            string pattern = @"\+?(CTRL|ALT|SHIFT|META|[0-9|a-z])";
-            MatchCollection collection = Regex.Matches(kb, pattern);
-            string[] keys = new string[2];
-
-            switch (collection.Count)
+            if (Validation.IsValidKeybindString(kb))
             {
-                case 2:
-                    keys[0] = collection[0].Groups[1].ToString();
-                    keys[1] = collection[1].Groups[1].ToString();
-                    break;
+                string pattern = Validation.patternKeybind;
+                Match match = Regex.Match(kb, pattern);
+                if(match.Success)
+                {
+                    firstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum), match.Groups[1].Value);
+                    secondKey = match.Groups[2].Value;
+                }
             }
-            this.Keys = keys;
         }
-
+        public string Output()
+        {
+            return OutputRemoveNullEmpty(firstKey.ToString() + "+" + secondKey);
+        }
         public string OutputRemoveNullEmpty(string v)
         {
             v = v.Replace("EMPTY+", "");
@@ -47,14 +49,22 @@ namespace shader_configurator
             v = v.Trim('+');
             return v;
         }
-
-        public void Initialize()
+        public override bool Equals(object obj)
         {
-            this.Keys = new string[2] { "", "" };
-        }
-        public string Output()
-        {
-            return OutputRemoveNullEmpty(String.Join("+", this.Keys));
+            if (obj == null)
+            {
+                return false;
+            }
+            Keybind c = obj as Keybind;
+            if (c == null)
+            {
+                return false;
+            }
+            if (this.firstKey == c.firstKey && this.secondKey == c.secondKey)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
