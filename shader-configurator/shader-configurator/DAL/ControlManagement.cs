@@ -7,6 +7,8 @@ using System.IO;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Runtime.CompilerServices;
+using shader_configurator.VAL;
+using System.Windows.Forms;
 
 namespace shader_configurator.DAL
 {
@@ -33,9 +35,16 @@ namespace shader_configurator.DAL
         {
             if (File.Exists(filepath))
             {
-                using (StreamWriter sw = new StreamWriter(filepath, true))
+                if(!Validation.IsDuplicateControl(control) && !Validation.IsDuplicateKeyBinding(control.keybind))
                 {
-                    sw.WriteLine(control.Output());
+                    using (StreamWriter sw = new StreamWriter(filepath, true))
+                    {
+                        sw.WriteLine(control.Output());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Profile/Binding already exists", "Error!");
                 }
             }
         }

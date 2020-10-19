@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="shader-configurator.exe" size="31192">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="shader-configurator.exe" size="32728">
       <assemblyIdentity name="shader-configurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>fCG2Otc1057ew/FVH22fGcp4DctweMBsjyjk5tNGF5A=</dsig:DigestValue>
+        <dsig:DigestValue>68wMbvPyzTw2x9syo24OvfdAalSn4AJzcGN5lWkcfhQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
