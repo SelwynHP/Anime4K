@@ -41,6 +41,13 @@ The new denoisers are/will be trained using a mix of the [SYNLA Dataset](https:/
 
 The new Anime4K upscalers were trained using the [SYNLA Dataset](https://github.com/bloc97/SYNLA-Dataset). They were designed to be extremely efficient at using GPU shader cores (extremely thin, densely connected CNNs). All three versions outperform NGU and FSRCNNX both in upscale quality and speed while also keeping the number of parameters low, as seen in the test image below. This test image was not part of the training dataset, nor is it used as validation for hyperparameter tuning. Performance benchmarks are based on 1080p->4K upscaling and were performed using an AMD Vega 64 GPU.
 
+The low resolution (LR) images are generated using the average area downscaling operation, which is the correct downscaling operation when we want to avoid using low pass filtering. Low pass filtering with bicubic/lanczos downscaling works well for natural images, but will destroy fine details in line art. The operation used is equivalent to `interpolation = INTER_AREA` in **OpenCV** and `-sws_flags area` in **FFmpeg**. <ins>Note that this operation is only equivalent to bilinear if and only if the downscaling ratio is exactly 2.</ins>
+
+The correctness of average area downscaling is especially apparent as Anime4K-L was trained on average area downscaling only, and it generalizes well on unseen bicubic/lanczos degradation (24.94->24.81dB), while FSRCNNX-8-LineArt and waifu2x-CUNet were trained on bicubic/lanczos degradation only and do not generalize well for the unseen average area downscaling. PSNR of (24.93->24.47dB) and (26.02->25.61dB) respectively. Bicubic/lanczos downscaling preserves edge sharpess better than average area downscaling. This artificial sharpness does not represent well the distribution of true LR images (images that were originally low resolution and did not pass through a bicubic/lanczos filter). [Link to results file.](https://github.com/bloc97/Anime4K/blob/master/results/Comparisons/Bird_FFmpeg/RESULTS.txt)
+
+It has also come to our attention that many anime might have been suboptimally downscaled using the aforementioned low pass + bicubic method, as it is the default operation of FFmpeg. We will tackle this problem in v3.3 (after the v3.2 denoising update) by training the neural network with many different downscaling operations.
+
+#### Comparison Table
 First in each category is highlighted in brackets.
 
 Algorithm | x2 PSNR (dB) ↑ | Runtime @4K (ms) ↓ | Parameters ↓
@@ -53,6 +60,8 @@ Algorithm | x2 PSNR (dB) ↑ | Runtime @4K (ms) ↓ | Parameters ↓
 [Anime4K-L](results/Comparisons/Bird/Anime4K-L.png) | 24.94 | 2.5 | 2.9k
 [Anime4K-UL](results/Comparisons/Bird/Anime4K-UL.png) | **[25.14]** | 10.7 | 15.9k
 [waifu2x-CUNet](results/Comparisons/Bird/waifu2x-CUNet.png) | **[25.61]**\* | >1000 | 1283.3k
+
+[Link to results file](https://github.com/bloc97/Anime4K/blob/master/results/Comparisons/Bird/RESULTS.txt)
 
 \**waifu2x is technically first in PSNR, but it is not a realtime algorithm and is 80 times larger than Anime4K-UL. It is included only for comparison purposes.*
 
@@ -70,3 +79,25 @@ Algorithm | x2 PSNR (dB) ↑ | Runtime @4K (ms) ↓ | Parameters ↓
  - https://github.com/andraantariksa/Anime4K-rs (Anime4K Re-Implemented in Rust)
  - https://github.com/TianZerL/Anime4KCPP (Anime4K & more algorithms implemented in C++)
  - https://github.com/k4yt3x/video2x (Anime Video Upscaling Pipeline)
+ 
+## Acknowledgements
+![CV](https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/OpenCV_Logo_with_text_svg_version.svg/180px-OpenCV_Logo_with_text_svg_version.svg.png)
+![TF](https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/TensorFlowLogo.svg/220px-TensorFlowLogo.svg.png)
+![Keras](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Keras_logo.svg/180px-Keras_logo.svg.png)
+![Torch](https://upload.wikimedia.org/wikipedia/en/f/f5/Torch_2014_logo.png)
+
+![mpv](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Mpv_icon.png/100px-Mpv_icon.png)
+![MPC](https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Media_Player_Classic_logo.png/64px-Media_Player_Classic_logo.png)
+
+Many thanks to the [OpenCV](https://github.com/opencv/opencv), [TensorFlow](https://github.com/tensorflow/tensorflow), [Keras](https://github.com/keras-team/keras) and [Torch](https://github.com/torch/torch7) groups and contributors. This project would not have been possible without the existence of high quality, open source machine learning libraries.
+
+I would also want to specially thank the creators of [VDSR](https://cv.snu.ac.kr/research/VDSR/) and [FSRCNN](http://mmlab.ie.cuhk.edu.hk/projects/FSRCNN.html), in addition to the open source projects [waifu2x](https://github.com/nagadomi/waifu2x) and [FSRCNNX](https://github.com/igv/FSRCNN-TensorFlow) for sparking my interest in creating this project. I am also extending my gratitude to the contributors of [mpv](https://github.com/mpv-player/mpv) and [MPC-HC](https://mpc-hc.org/)/[BE](https://sourceforge.net/projects/mpcbe/) for their efforts on creating excellent media players with endless customization options.  
+Furthermore, I want to thank the people who contributed to this project in any form, be it by reporting bugs, submitting suggestions, helping others' issues or submitting code. I will forever hold you in high regard.
+
+I also wish to express my sincere gratitude to the people of [Université de Montréal](https://www.umontreal.ca/), [DIRO](https://diro.umontreal.ca/accueil/), [LIGUM](http://www.ligum.umontreal.ca/) and [MILA](https://mila.quebec/en/) for providing so many opportunities to students (including me), providing the necessary infrastructure and fostering an excellent learning environment.
+
+I would also like to thank the greater open source community, in which the assortment of concrete examples and code were of great help.
+
+Finally, but not least, infinite thanks to my family, friends and professors for providing financial, technical, social support and expertise for my ongoing learning journey during these hard times. Your help has been beyond description, really.
+
+*This list is not final, as the project is far from done. Any future acknowledgements will be promptly added.*
