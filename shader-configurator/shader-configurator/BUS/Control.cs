@@ -118,8 +118,8 @@ namespace shader_configurator
             {
                 return false;
             }
-            if (this.keybind.firstKey == c.keybind.firstKey
-                && this.keybind.secondKey == c.keybind.secondKey
+            if (this.keybind.FirstKey == c.keybind.FirstKey
+                && this.keybind.SecondKey == c.keybind.SecondKey
                 && this.command.command_name == c.command.command_name
                 && ScrambledEquals(this.command.values, c.command.values)
                 && this.Comment == c.Comment)

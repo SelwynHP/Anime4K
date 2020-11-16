@@ -17,13 +17,20 @@ namespace shader_configurator
     }
     public class Keybind
     {
-        public KeybindEnum firstKey;
-        public string secondKey;
+        private string secondKey;
+        public KeybindEnum FirstKey { get; set; }
+        public string SecondKey 
+        { 
+            get { return secondKey; } 
+            set { 
+                if (!Validation.ContainsWordChar(value)) { secondKey = value; } 
+            } 
+        }
 
         public Keybind()
         {
-            this.firstKey = KeybindEnum.EMPTY;
-            this.secondKey = "";
+            this.FirstKey = KeybindEnum.EMPTY;
+            this.SecondKey = "";
         }
         public Keybind(string kb) : this()
         {
@@ -33,14 +40,21 @@ namespace shader_configurator
                 Match match = Regex.Match(kb, pattern);
                 if(match.Success)
                 {
-                    firstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum), match.Groups[1].Value);
-                    secondKey = match.Groups[2].Value;
+                    if (String.IsNullOrEmpty(match.Groups[1].Value))
+                    {
+                        FirstKey = KeybindEnum.EMPTY;
+                    }
+                    else
+                    {
+                        FirstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum), match.Groups[1].Value);
+                    }
+                    SecondKey = match.Groups[2].Value;
                 }
             }
         }
         public string Output()
         {
-            return OutputRemoveNullEmpty(firstKey.ToString() + "+" + secondKey);
+            return OutputRemoveNullEmpty(FirstKey.ToString() + "+" + SecondKey);
         }
         public string OutputRemoveNullEmpty(string v)
         {
@@ -60,7 +74,7 @@ namespace shader_configurator
             {
                 return false;
             }
-            if (this.firstKey == c.firstKey && this.secondKey == c.secondKey)
+            if (this.FirstKey == c.FirstKey && this.SecondKey == c.SecondKey)
             {
                 return true;
             }
