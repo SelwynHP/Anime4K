@@ -14,7 +14,17 @@ namespace shader_configurator.DAL
 {
     public static class ControlManagement
     {
-        public static string filepath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\mpv\input.conf";
+        public static readonly string filepath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\mpv\input.conf";
+        public static readonly List<Control> defaultControls = new List<Control>()
+            {
+                new Control(@"CTRL+1 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 480/720p (Faithful)"""),
+                new Control(@"CTRL+2 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 480/720p (Perceptual Quality)"""),
+                new Control(@"CTRL+3 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;~~/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;~~/shaders/Anime4K_Deblur_DoG.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 480/720p (Perceptual Quality and Deblur)"""),
+                new Control(@"CTRL+4 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 1080p (Faithful)"""),
+                new Control(@"CTRL+5 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 1080p (Perceptual Quality)"""),
+                new Control(@"CTRL+6 no-osd change-list glsl-shaders set ""~~/shaders/Anime4K_Denoise_Bilateral_Mode.glsl;~~/shaders/Anime4K_Deblur_DoG.glsl;~~/shaders/Anime4K_DarkLines_HQ.glsl;~~/shaders/Anime4K_ThinLines_HQ.glsl;~~/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 1080p (Perceptual Quality and Deblur)"""),
+                new Control(@"CTRL+0 no-osd change-list glsl-shaders clr """"; show-text ""GLSL shaders cleared""")
+            };
         public static List<Control> GetControls()
         {
             List<Control> cList = new List<Control>();
@@ -35,16 +45,14 @@ namespace shader_configurator.DAL
         {
             if (File.Exists(filepath))
             {
-                if(!Validation.IsDuplicateControl(control) && !Validation.IsDuplicateKeyBinding(control.keybind))
+                bool isDuplicateControl = Validation.IsDuplicateControl(control);
+                bool isDuplicateKeyBinding = Validation.IsDuplicateKeyBinding(control.keybind);
+                if(!isDuplicateControl && !isDuplicateKeyBinding)
                 {
                     using (StreamWriter sw = new StreamWriter(filepath, true))
                     {
                         sw.WriteLine(control.Output());
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Profile/Binding already exists", "Error!");
                 }
             }
         }
@@ -94,6 +102,24 @@ namespace shader_configurator.DAL
                         }
                     }
                 }
+            }
+        }
+
+        public static void SetControls()
+        {
+            File.WriteAllText(filepath, "");
+            foreach(Control element in defaultControls)
+            {
+                SetControl(element);
+            }
+        }
+
+        public static void SetControls(List<Control> controls)
+        {
+            File.WriteAllText(filepath, "");
+            foreach(Control element in controls)
+            {
+                SetControl(element);
             }
         }
     }

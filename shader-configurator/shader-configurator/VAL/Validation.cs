@@ -11,10 +11,14 @@ namespace shader_configurator.VAL
 {
     public static class Validation
     {
-        public static string patternControl = @"^((?>CTRL|SHIFT|ALT|META)+\+[0-9|a-z])\s((?>no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(?>.+\.glsl)?""))(?>; show-text ""([^""""]*)"")?$";
-        public static string patternKeybind = @"^(CTRL|ALT|SHIFT|META)\+([0-9a-z])$";
+        public static string patternControl = @"^((?>(?>CTRL|SHIFT|ALT|META)+\+)?[0-9|a-z])\s((?>no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(?>.+\.glsl)?""))(?>; show-text ""([^""""]*)"")?$";
+        public static string patternKeybind = @"^(?>(CTRL|ALT|SHIFT|META)\+)?([0-9a-z])$";
         public static string patternCommand = @"^(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")$";
 
+        public static bool ContainsWordChar(string str)
+        {
+            return Regex.IsMatch(str, @"\W");
+        }
         public static bool IsValidControlString(string v)
         {
             bool valid = false;
@@ -47,23 +51,13 @@ namespace shader_configurator.VAL
         }
         public static bool IsDuplicateControl(Control control)
         {
-            bool duplicate = false;
-            if (ControlManagement.GetControls().Contains(control))
-            {
-                duplicate = true;
-            }
-            return duplicate;
+            return ControlManagement.GetControls().Contains(control);
         }
         public static bool IsDuplicateKeyBinding(Keybind keybind)
         {
             bool duplicate = false;
-            foreach(Control element in ControlManagement.GetControls())
-            {
-                if (element.keybind.Equals(keybind))
-                {
-                    duplicate = true;
-                }
-            }
+            Control control = ControlManagement.GetControls().Find(x => x.keybind.Equals(keybind));
+            if(control != null) { duplicate = true; }
             return duplicate;
         }
     }

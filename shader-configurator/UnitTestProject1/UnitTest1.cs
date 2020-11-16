@@ -24,20 +24,43 @@ namespace UnitTestProject1
         [TestMethod]
         public void KeybindOutputFormatTest()
         {
-            Keybind kb = new Keybind();
-            kb.firstKey = KeybindEnum.CTRL;
-            kb.secondKey = "1";
+            Keybind kb = new Keybind
+            {
+                FirstKey = KeybindEnum.CTRL,
+                SecondKey = "1"
+            };
             string pattern = Validation.patternKeybind;
             Assert.IsTrue(Regex.IsMatch(kb.Output(), pattern));
         }
         [TestMethod]
         public void KeybindOutputRemoveNullEmptyTest()
         {
-            Keybind kb = new Keybind();
-            kb.firstKey = KeybindEnum.ALT;
-            kb.secondKey = "1";
+            Keybind kb = new Keybind
+            {
+                FirstKey = KeybindEnum.ALT,
+                SecondKey = "1"
+            };
             string str = kb.Output();
             Assert.IsTrue(!str.Contains("EMPTY") || !str.Contains(@"\s"));
+        }
+        [TestMethod]
+        public void KeyBindSecondKeyMustBeWordCharTest()
+        {
+            bool success = false;
+            Keybind keybind = new Keybind();
+            keybind.FirstKey = KeybindEnum.CTRL;
+            keybind.SecondKey = "!";
+            string pattern = @"\W";
+            if (Regex.IsMatch(keybind.SecondKey, pattern))
+            {
+                success = false;
+            }
+            else
+            {
+                success = true;
+            }
+
+            Assert.IsTrue(success);
         }
     }
     [TestClass]
@@ -61,11 +84,16 @@ namespace UnitTestProject1
         [TestMethod]
         public void CommandValueOutputFormatTest()
         {
-            Command cmd = new Command();
-            cmd.command_name = "no-osd change-list glsl-shaders set";
-            cmd.values.Add(ShaderEnum.DarkLinesFast);
-            cmd.values.Add(ShaderEnum.DeblurMedium);
-            cmd.values.Add(ShaderEnum.UpscaleOriginal);
+            Command cmd = new Command
+            {
+                command_name = "no-osd change-list glsl-shaders set",
+                values = new List<ShaderEnum>
+                {
+                    ShaderEnum.DarkLinesFast,
+                    ShaderEnum.DeblurMedium,
+                    ShaderEnum.UpscaleOriginal
+                }
+            };
             string pattern = Validation.patternCommand;
             Assert.IsTrue(Regex.IsMatch(cmd.ValueOutput(), pattern));
         }
@@ -113,9 +141,8 @@ namespace UnitTestProject1
         }
         public bool ControlOutputFormatTest(Control control)
         {
-            bool match = false;
             string pattern = Validation.patternControl;
-            match = Regex.IsMatch(control.Output(), pattern);
+            bool match = Regex.IsMatch(control.Output(), pattern);
             return match;
         }
         [TestMethod]
@@ -129,14 +156,18 @@ namespace UnitTestProject1
         public void ControlDuplicateTest()
         {
             bool success = true;
-            Control control = new Control();
-            control.keybind = new Keybind("CTRL+9");
-            control.command.command_name = "no-osd change-list glsl-shaders set";
-            control.command.values.Add(ShaderEnum.ACNet);
-            control.command.values.Add(ShaderEnum.DarkLinesHQ);
-            control.Comment = "Test";
+            Control control = new Control
+            {
+                keybind = new Keybind("CTRL+9"),
+                command = new Command
+                {
+                    command_name = "no-osd change-list glsl-shaders set",
+                    values = new List<ShaderEnum>{ShaderEnum.ACNet,ShaderEnum.DarkLinesHQ}
+                },
+                Comment = "Test"
+            };
 
-            ControlManagement.SetControl(control);
+            shader_configurator.DAL.ControlManagement.SetControl(control);
             List<Control> cList = ControlManagement.GetControls();
             ControlManagement.SetControl(control);
 
@@ -148,6 +179,21 @@ namespace UnitTestProject1
             Assert.IsTrue(success);
             
         }
+        [TestMethod]
+        public void ControtSetDefaultTest()
+        {
+            bool success = false;
+            List<Control> defaultControls = ControlManagement.defaultControls;
+            List<Control> oldControls = ControlManagement.GetControls();
+            ControlManagement.SetControls();
+            List<Control> newControls = ControlManagement.GetControls();
+            if (defaultControls.All(newControls.Contains) && defaultControls.Count == newControls.Count)
+            {
+                success = true;
+            }
+            ControlManagement.SetControls(oldControls);
+            Assert.IsTrue(success);
+        }
     }
     [TestClass]
     public class UnitTestControlManagement
@@ -158,8 +204,8 @@ namespace UnitTestProject1
             bool success = false;
             //Control Initialization
             Control control = new Control();
-            control.keybind.firstKey = KeybindEnum.SHIFT;
-            control.keybind.secondKey = "2";
+            control.keybind.FirstKey = KeybindEnum.SHIFT;
+            control.keybind.SecondKey = "2";
             control.command.command_name = "no-osd change-list glsl-shaders set";
             control.command.values.Add(ShaderEnum.AutoDownscale);
             control.command.values.Add(ShaderEnum.DarkLinesHQ);
@@ -177,8 +223,8 @@ namespace UnitTestProject1
             bool success = false;
 
             Control control = new Control();
-            control.keybind.firstKey = KeybindEnum.CTRL;
-            control.keybind.secondKey = "9";
+            control.keybind.FirstKey = KeybindEnum.CTRL;
+            control.keybind.SecondKey = "9";
             control.command.command_name = "no-osd change-list glsl-shaders set";
             control.command.values.Add(ShaderEnum.AutoDownscale);
             control.command.values.Add(ShaderEnum.DarkLinesHQ);
@@ -187,8 +233,8 @@ namespace UnitTestProject1
             ControlManagement.SetControl(control);
 
             Control newControl = new Control();
-            newControl.keybind.firstKey = KeybindEnum.SHIFT;
-            newControl.keybind.secondKey = "0";
+            newControl.keybind.FirstKey = KeybindEnum.SHIFT;
+            newControl.keybind.SecondKey = "0";
             newControl.command.command_name = "no-osd change-list glsl-shaders set";
             newControl.command.values.Add(ShaderEnum.AutoDownscale);
             newControl.command.values.Add(ShaderEnum.DeblurLarge);
@@ -205,8 +251,8 @@ namespace UnitTestProject1
         public void ControlManagementDeleteControlTest()
         {
             Control control = new Control();
-            control.keybind.firstKey = KeybindEnum.CTRL;
-            control.keybind.secondKey = "7";
+            control.keybind.FirstKey = KeybindEnum.CTRL;
+            control.keybind.SecondKey = "7";
             control.command.command_name = "no-osd change-list glsl-shaders set";
             control.command.values.Add(ShaderEnum.AutoDownscale);
             control.command.values.Add(ShaderEnum.DarkLinesHQ);

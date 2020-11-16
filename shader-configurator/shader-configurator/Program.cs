@@ -17,7 +17,7 @@ namespace shader_configurator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ControlManagement());
+            Application.Run(new ControlForm());
         }
     }
 }

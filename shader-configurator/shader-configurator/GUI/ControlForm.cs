@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace shader_configurator.GUI
 {
-    public partial class ControlManagement : Form
+    public partial class ControlForm : Form
     {
         Control myControl = new Control();
 
@@ -53,6 +53,7 @@ namespace shader_configurator.GUI
             textBoxComment.Text = "";
             listBoxShaders.Items.Clear();
 
+            comboBoxBinding1.SelectedItem = myControl.keybind.FirstKey;
             textBoxBindings.Text = myControl.keybind.Output();
             textBoxComment.Text = myControl.Comment;
             foreach(ShaderEnum element in myControl.command.values)
@@ -68,7 +69,7 @@ namespace shader_configurator.GUI
                 listBoxControls.Items.Add(element);
             }
         }
-        public ControlManagement()
+        public ControlForm()
         {
             InitializeComponent();
             InitializeControls();
@@ -79,8 +80,8 @@ namespace shader_configurator.GUI
             Keybind kb = new Keybind();
             try
             {
-                kb.firstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum),comboBoxBinding1.SelectedItem.ToString());
-                kb.secondKey = textBoxBinding3.Text;
+                kb.FirstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum),comboBoxBinding1.SelectedItem.ToString());
+                kb.SecondKey = textBoxBinding3.Text;
             }
             catch(NullReferenceException nre)
             {
@@ -100,8 +101,8 @@ namespace shader_configurator.GUI
 
         private void buttonUnsetBinding_Click(object sender, EventArgs e)
         {
-            myControl.keybind.firstKey = KeybindEnum.EMPTY;
-            myControl.keybind.secondKey = "";
+            myControl.keybind.FirstKey = KeybindEnum.EMPTY;
+            myControl.keybind.SecondKey = "";
             SetPreview();
             SetControls();
         }
@@ -212,6 +213,23 @@ namespace shader_configurator.GUI
             textBoxComment.ReadOnly = false;
             SetPreview();
             SetControls();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Warning! This action will delete all of the currently saved profiles!\nAre you sure you would like to proceed", "Warning", MessageBoxButtons.YesNoCancel);
+            if(result == DialogResult.Yes)
+            {
+                ControlManagement.SetControls();
+                MessageBox.Show("List of profiles were set to default");
+            }
+            else if(result == DialogResult.No)
+            {
+                MessageBox.Show("No changes were made.");
+            }
+
+            SetPreview();
+            SetControlList();
         }
     }
 }
