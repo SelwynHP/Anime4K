@@ -46,20 +46,21 @@ namespace UnitTestProject1
         [TestMethod]
         public void KeyBindSecondKeyMustBeWordCharTest()
         {
-            bool success = false;
-            Keybind keybind = new Keybind();
-            keybind.FirstKey = KeybindEnum.CTRL;
-            keybind.SecondKey = "!";
-            string pattern = @"\W";
-            if (Regex.IsMatch(keybind.SecondKey, pattern))
+            Keybind keybind = new Keybind
             {
-                success = false;
-            }
-            else
+                FirstKey = KeybindEnum.CTRL,
+                SecondKey = "!"
+            };
+            string pattern = @"\W";
+            bool success;
+            if (!Regex.IsMatch(keybind.SecondKey, pattern))
             {
                 success = true;
             }
-
+            else
+            {
+                success = false;
+            }
             Assert.IsTrue(success);
         }
     }

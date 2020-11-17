@@ -61,15 +61,6 @@ namespace shader_configurator.DAL
             if (File.Exists(filepath))
             {
                 List<Control> cList = GetControls();
-                //Control controlToDelete = new Control();
-                //foreach(Control element in cList)
-                //{
-                //    if (element.Equals(control))
-                //    {
-                //        controlToDelete = element;
-                //        break;
-                //    }
-                //}
                 if (cList.Remove(control))
                 {
                     using (StreamWriter sw = new StreamWriter(filepath, false))
