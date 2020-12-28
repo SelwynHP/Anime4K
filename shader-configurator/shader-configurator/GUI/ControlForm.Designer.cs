@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.TabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonReset = new System.Windows.Forms.Button();
             this.labelPreview = new System.Windows.Forms.Label();
             this.labelShaders = new System.Windows.Forms.Label();
             this.labelCommand = new System.Windows.Forms.Label();
@@ -59,22 +60,21 @@
             this.buttonApply = new System.Windows.Forms.Button();
             this.textBoxShaderRootDirectory = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.buttonReset = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
+            this.tabControlMain.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControlMain
             // 
-            this.tabControl1.Controls.Add(this.TabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1875, 940);
-            this.tabControl1.TabIndex = 0;
+            this.tabControlMain.Controls.Add(this.TabPage1);
+            this.tabControlMain.Controls.Add(this.tabPage2);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(703, 394);
+            this.tabControlMain.TabIndex = 0;
+            this.tabControlMain.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlMain_Selected);
             // 
             // TabPage1
             // 
@@ -102,67 +102,76 @@
             this.TabPage1.Controls.Add(this.comboBoxCommand);
             this.TabPage1.Controls.Add(this.listBoxControls);
             this.TabPage1.Controls.Add(this.comboBoxBinding1);
-            this.TabPage1.Location = new System.Drawing.Point(4, 40);
-            this.TabPage1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.TabPage1.Location = new System.Drawing.Point(4, 22);
             this.TabPage1.Name = "TabPage1";
-            this.TabPage1.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.TabPage1.Size = new System.Drawing.Size(1867, 896);
+            this.TabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabPage1.Size = new System.Drawing.Size(695, 368);
             this.TabPage1.TabIndex = 0;
             this.TabPage1.Text = "Main";
             this.TabPage1.UseVisualStyleBackColor = true;
             // 
+            // buttonReset
+            // 
+            this.buttonReset.Location = new System.Drawing.Point(287, 59);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(112, 23);
+            this.buttonReset.TabIndex = 28;
+            this.buttonReset.Text = "Default Profiles";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            // 
             // labelPreview
             // 
             this.labelPreview.AutoSize = true;
-            this.labelPreview.Location = new System.Drawing.Point(141, 448);
-            this.labelPreview.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.labelPreview.Location = new System.Drawing.Point(53, 188);
             this.labelPreview.Name = "labelPreview";
-            this.labelPreview.Size = new System.Drawing.Size(129, 31);
+            this.labelPreview.Size = new System.Drawing.Size(51, 13);
             this.labelPreview.TabIndex = 27;
             this.labelPreview.Text = "(Preview)";
             // 
             // labelShaders
             // 
             this.labelShaders.AutoSize = true;
-            this.labelShaders.Location = new System.Drawing.Point(1075, 38);
+            this.labelShaders.Location = new System.Drawing.Point(403, 16);
+            this.labelShaders.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelShaders.Name = "labelShaders";
-            this.labelShaders.Size = new System.Drawing.Size(133, 31);
+            this.labelShaders.Size = new System.Drawing.Size(52, 13);
             this.labelShaders.TabIndex = 26;
             this.labelShaders.Text = "(Shaders)";
             // 
             // labelCommand
             // 
             this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(760, 38);
+            this.labelCommand.Location = new System.Drawing.Point(285, 16);
+            this.labelCommand.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelCommand.Name = "labelCommand";
-            this.labelCommand.Size = new System.Drawing.Size(156, 31);
+            this.labelCommand.Size = new System.Drawing.Size(60, 13);
             this.labelCommand.TabIndex = 25;
             this.labelCommand.Text = "(Command)";
             // 
             // labelBindings
             // 
             this.labelBindings.AutoSize = true;
-            this.labelBindings.Location = new System.Drawing.Point(144, 38);
+            this.labelBindings.Location = new System.Drawing.Point(54, 16);
+            this.labelBindings.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelBindings.Name = "labelBindings";
-            this.labelBindings.Size = new System.Drawing.Size(136, 31);
+            this.labelBindings.Size = new System.Drawing.Size(53, 13);
             this.labelBindings.TabIndex = 1;
             this.labelBindings.Text = "(Bindings)";
             // 
             // textBoxComment
             // 
-            this.textBoxComment.Location = new System.Drawing.Point(149, 274);
-            this.textBoxComment.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBoxComment.Location = new System.Drawing.Point(56, 115);
             this.textBoxComment.Multiline = true;
             this.textBoxComment.Name = "textBoxComment";
-            this.textBoxComment.Size = new System.Drawing.Size(593, 45);
+            this.textBoxComment.Size = new System.Drawing.Size(225, 21);
             this.textBoxComment.TabIndex = 24;
             // 
             // buttonUnsetComment
             // 
-            this.buttonUnsetComment.Location = new System.Drawing.Point(464, 339);
-            this.buttonUnsetComment.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonUnsetComment.Location = new System.Drawing.Point(174, 142);
             this.buttonUnsetComment.Name = "buttonUnsetComment";
-            this.buttonUnsetComment.Size = new System.Drawing.Size(285, 55);
+            this.buttonUnsetComment.Size = new System.Drawing.Size(107, 23);
             this.buttonUnsetComment.TabIndex = 23;
             this.buttonUnsetComment.Text = "Unset Comment";
             this.buttonUnsetComment.UseVisualStyleBackColor = true;
@@ -170,10 +179,9 @@
             // 
             // buttonSetComment
             // 
-            this.buttonSetComment.Location = new System.Drawing.Point(149, 339);
-            this.buttonSetComment.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonSetComment.Location = new System.Drawing.Point(56, 142);
             this.buttonSetComment.Name = "buttonSetComment";
-            this.buttonSetComment.Size = new System.Drawing.Size(285, 55);
+            this.buttonSetComment.Size = new System.Drawing.Size(107, 23);
             this.buttonSetComment.TabIndex = 22;
             this.buttonSetComment.Text = "Set Comment";
             this.buttonSetComment.UseVisualStyleBackColor = true;
@@ -181,10 +189,9 @@
             // 
             // buttonDeleteProfile
             // 
-            this.buttonDeleteProfile.Location = new System.Drawing.Point(765, 205);
-            this.buttonDeleteProfile.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonDeleteProfile.Location = new System.Drawing.Point(287, 86);
             this.buttonDeleteProfile.Name = "buttonDeleteProfile";
-            this.buttonDeleteProfile.Size = new System.Drawing.Size(299, 55);
+            this.buttonDeleteProfile.Size = new System.Drawing.Size(112, 23);
             this.buttonDeleteProfile.TabIndex = 21;
             this.buttonDeleteProfile.Text = "Delete Profile";
             this.buttonDeleteProfile.UseVisualStyleBackColor = true;
@@ -192,10 +199,9 @@
             // 
             // buttonUpdateProfile
             // 
-            this.buttonUpdateProfile.Location = new System.Drawing.Point(765, 269);
-            this.buttonUpdateProfile.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonUpdateProfile.Location = new System.Drawing.Point(287, 113);
             this.buttonUpdateProfile.Name = "buttonUpdateProfile";
-            this.buttonUpdateProfile.Size = new System.Drawing.Size(299, 55);
+            this.buttonUpdateProfile.Size = new System.Drawing.Size(112, 23);
             this.buttonUpdateProfile.TabIndex = 20;
             this.buttonUpdateProfile.Text = "Update Profile";
             this.buttonUpdateProfile.UseVisualStyleBackColor = true;
@@ -203,10 +209,9 @@
             // 
             // buttonAddProfile
             // 
-            this.buttonAddProfile.Location = new System.Drawing.Point(765, 339);
-            this.buttonAddProfile.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonAddProfile.Location = new System.Drawing.Point(287, 142);
             this.buttonAddProfile.Name = "buttonAddProfile";
-            this.buttonAddProfile.Size = new System.Drawing.Size(299, 55);
+            this.buttonAddProfile.Size = new System.Drawing.Size(112, 23);
             this.buttonAddProfile.TabIndex = 19;
             this.buttonAddProfile.Text = "Add Profile";
             this.buttonAddProfile.UseVisualStyleBackColor = true;
@@ -214,10 +219,9 @@
             // 
             // buttonClearShader
             // 
-            this.buttonClearShader.Location = new System.Drawing.Point(1507, 138);
-            this.buttonClearShader.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonClearShader.Location = new System.Drawing.Point(565, 58);
             this.buttonClearShader.Name = "buttonClearShader";
-            this.buttonClearShader.Size = new System.Drawing.Size(195, 55);
+            this.buttonClearShader.Size = new System.Drawing.Size(73, 23);
             this.buttonClearShader.TabIndex = 18;
             this.buttonClearShader.Text = "Clear";
             this.buttonClearShader.UseVisualStyleBackColor = true;
@@ -226,28 +230,24 @@
             // listBoxShaders
             // 
             this.listBoxShaders.FormattingEnabled = true;
-            this.listBoxShaders.ItemHeight = 31;
-            this.listBoxShaders.Location = new System.Drawing.Point(1080, 198);
-            this.listBoxShaders.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.listBoxShaders.Location = new System.Drawing.Point(405, 83);
             this.listBoxShaders.Name = "listBoxShaders";
-            this.listBoxShaders.Size = new System.Drawing.Size(615, 190);
+            this.listBoxShaders.Size = new System.Drawing.Size(233, 82);
             this.listBoxShaders.TabIndex = 17;
             this.listBoxShaders.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.listBoxShaders_ControlAdded);
             // 
             // textBoxBinding3
             // 
-            this.textBoxBinding3.Location = new System.Drawing.Point(560, 76);
-            this.textBoxBinding3.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBoxBinding3.Location = new System.Drawing.Point(210, 32);
             this.textBoxBinding3.Name = "textBoxBinding3";
-            this.textBoxBinding3.Size = new System.Drawing.Size(183, 38);
+            this.textBoxBinding3.Size = new System.Drawing.Size(71, 20);
             this.textBoxBinding3.TabIndex = 16;
             // 
             // buttonUnsetShader
             // 
-            this.buttonUnsetShader.Location = new System.Drawing.Point(1277, 138);
-            this.buttonUnsetShader.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonUnsetShader.Location = new System.Drawing.Point(479, 58);
             this.buttonUnsetShader.Name = "buttonUnsetShader";
-            this.buttonUnsetShader.Size = new System.Drawing.Size(213, 55);
+            this.buttonUnsetShader.Size = new System.Drawing.Size(80, 23);
             this.buttonUnsetShader.TabIndex = 15;
             this.buttonUnsetShader.Text = "Unset Shader";
             this.buttonUnsetShader.UseVisualStyleBackColor = true;
@@ -255,10 +255,9 @@
             // 
             // buttonSetShader
             // 
-            this.buttonSetShader.Location = new System.Drawing.Point(1080, 141);
-            this.buttonSetShader.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonSetShader.Location = new System.Drawing.Point(405, 59);
             this.buttonSetShader.Name = "buttonSetShader";
-            this.buttonSetShader.Size = new System.Drawing.Size(181, 55);
+            this.buttonSetShader.Size = new System.Drawing.Size(68, 23);
             this.buttonSetShader.TabIndex = 14;
             this.buttonSetShader.Text = "Set Shader";
             this.buttonSetShader.UseVisualStyleBackColor = true;
@@ -266,10 +265,9 @@
             // 
             // buttonUnsetBinding
             // 
-            this.buttonUnsetBinding.Location = new System.Drawing.Point(464, 138);
-            this.buttonUnsetBinding.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonUnsetBinding.Location = new System.Drawing.Point(174, 58);
             this.buttonUnsetBinding.Name = "buttonUnsetBinding";
-            this.buttonUnsetBinding.Size = new System.Drawing.Size(285, 55);
+            this.buttonUnsetBinding.Size = new System.Drawing.Size(107, 23);
             this.buttonUnsetBinding.TabIndex = 13;
             this.buttonUnsetBinding.Text = "Unset Binding";
             this.buttonUnsetBinding.UseVisualStyleBackColor = true;
@@ -277,28 +275,25 @@
             // 
             // textBoxPreview
             // 
-            this.textBoxPreview.Location = new System.Drawing.Point(147, 486);
-            this.textBoxPreview.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBoxPreview.Location = new System.Drawing.Point(55, 204);
             this.textBoxPreview.Name = "textBoxPreview";
-            this.textBoxPreview.Size = new System.Drawing.Size(1545, 38);
+            this.textBoxPreview.Size = new System.Drawing.Size(582, 20);
             this.textBoxPreview.TabIndex = 12;
             // 
             // comboBoxShader
             // 
             this.comboBoxShader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShader.FormattingEnabled = true;
-            this.comboBoxShader.Location = new System.Drawing.Point(1080, 74);
-            this.comboBoxShader.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.comboBoxShader.Location = new System.Drawing.Point(405, 31);
             this.comboBoxShader.Name = "comboBoxShader";
-            this.comboBoxShader.Size = new System.Drawing.Size(615, 39);
+            this.comboBoxShader.Size = new System.Drawing.Size(233, 21);
             this.comboBoxShader.TabIndex = 9;
             // 
             // buttonSetBinding
             // 
-            this.buttonSetBinding.Location = new System.Drawing.Point(149, 141);
-            this.buttonSetBinding.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonSetBinding.Location = new System.Drawing.Point(56, 59);
             this.buttonSetBinding.Name = "buttonSetBinding";
-            this.buttonSetBinding.Size = new System.Drawing.Size(285, 55);
+            this.buttonSetBinding.Size = new System.Drawing.Size(107, 23);
             this.buttonSetBinding.TabIndex = 8;
             this.buttonSetBinding.Text = "Set Binding";
             this.buttonSetBinding.UseVisualStyleBackColor = true;
@@ -306,31 +301,27 @@
             // 
             // textBoxBindings
             // 
-            this.textBoxBindings.Location = new System.Drawing.Point(149, 210);
-            this.textBoxBindings.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBoxBindings.Location = new System.Drawing.Point(56, 88);
             this.textBoxBindings.Multiline = true;
             this.textBoxBindings.Name = "textBoxBindings";
-            this.textBoxBindings.Size = new System.Drawing.Size(593, 45);
+            this.textBoxBindings.Size = new System.Drawing.Size(225, 21);
             this.textBoxBindings.TabIndex = 7;
             this.textBoxBindings.TextChanged += new System.EventHandler(this.textBoxBindings_TextChanged);
             // 
             // comboBoxCommand
             // 
             this.comboBoxCommand.FormattingEnabled = true;
-            this.comboBoxCommand.Location = new System.Drawing.Point(765, 74);
-            this.comboBoxCommand.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.comboBoxCommand.Location = new System.Drawing.Point(287, 31);
             this.comboBoxCommand.Name = "comboBoxCommand";
-            this.comboBoxCommand.Size = new System.Drawing.Size(292, 39);
+            this.comboBoxCommand.Size = new System.Drawing.Size(112, 21);
             this.comboBoxCommand.TabIndex = 6;
             // 
             // listBoxControls
             // 
             this.listBoxControls.FormattingEnabled = true;
-            this.listBoxControls.ItemHeight = 31;
-            this.listBoxControls.Location = new System.Drawing.Point(147, 546);
-            this.listBoxControls.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.listBoxControls.Location = new System.Drawing.Point(55, 229);
             this.listBoxControls.Name = "listBoxControls";
-            this.listBoxControls.Size = new System.Drawing.Size(1545, 283);
+            this.listBoxControls.Size = new System.Drawing.Size(582, 121);
             this.listBoxControls.TabIndex = 3;
             this.listBoxControls.SelectedIndexChanged += new System.EventHandler(this.listBoxControls_SelectedIndexChanged);
             // 
@@ -338,10 +329,9 @@
             // 
             this.comboBoxBinding1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBinding1.FormattingEnabled = true;
-            this.comboBoxBinding1.Location = new System.Drawing.Point(149, 76);
-            this.comboBoxBinding1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.comboBoxBinding1.Location = new System.Drawing.Point(56, 32);
             this.comboBoxBinding1.Name = "comboBoxBinding1";
-            this.comboBoxBinding1.Size = new System.Drawing.Size(388, 39);
+            this.comboBoxBinding1.Size = new System.Drawing.Size(148, 21);
             this.comboBoxBinding1.TabIndex = 0;
             // 
             // tabPage2
@@ -350,21 +340,19 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.buttonApply);
             this.tabPage2.Controls.Add(this.textBoxShaderRootDirectory);
-            this.tabPage2.Location = new System.Drawing.Point(4, 40);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.tabPage2.Size = new System.Drawing.Size(1867, 896);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Size = new System.Drawing.Size(695, 368);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // buttonBrowse
             // 
-            this.buttonBrowse.Location = new System.Drawing.Point(1333, 95);
-            this.buttonBrowse.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonBrowse.Location = new System.Drawing.Point(500, 40);
             this.buttonBrowse.Name = "buttonBrowse";
-            this.buttonBrowse.Size = new System.Drawing.Size(200, 48);
+            this.buttonBrowse.Size = new System.Drawing.Size(75, 20);
             this.buttonBrowse.TabIndex = 3;
             this.buttonBrowse.Text = "Browse";
             this.buttonBrowse.UseVisualStyleBackColor = true;
@@ -373,52 +361,38 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(251, 57);
-            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label1.Location = new System.Drawing.Point(94, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(283, 31);
+            this.label1.Size = new System.Drawing.Size(112, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Shader Root Directory";
             // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(1117, 646);
-            this.buttonApply.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.buttonApply.Location = new System.Drawing.Point(419, 271);
             this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(200, 55);
+            this.buttonApply.Size = new System.Drawing.Size(75, 23);
             this.buttonApply.TabIndex = 1;
             this.buttonApply.Text = "Apply";
             this.buttonApply.UseVisualStyleBackColor = true;
+            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
             // textBoxShaderRootDirectory
             // 
-            this.textBoxShaderRootDirectory.Location = new System.Drawing.Point(259, 95);
-            this.textBoxShaderRootDirectory.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBoxShaderRootDirectory.Location = new System.Drawing.Point(97, 40);
             this.textBoxShaderRootDirectory.Name = "textBoxShaderRootDirectory";
-            this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(1052, 38);
+            this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(397, 20);
             this.textBoxShaderRootDirectory.TabIndex = 0;
-            // 
-            // buttonReset
-            // 
-            this.buttonReset.Location = new System.Drawing.Point(765, 141);
-            this.buttonReset.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(299, 55);
-            this.buttonReset.TabIndex = 28;
-            this.buttonReset.Text = "Default Profiles";
-            this.buttonReset.UseVisualStyleBackColor = true;
-            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // ControlForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1867, 930);
-            this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.ClientSize = new System.Drawing.Size(700, 390);
+            this.Controls.Add(this.tabControlMain);
             this.Name = "ControlForm";
             this.Text = "shader-configurator";
-            this.tabControl1.ResumeLayout(false);
+            this.tabControlMain.ResumeLayout(false);
             this.TabPage1.ResumeLayout(false);
             this.TabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -429,7 +403,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage TabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button buttonUnsetShader;

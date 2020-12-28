@@ -14,7 +14,6 @@ namespace shader_configurator.VAL
         public static string patternControl = @"^((?>(?>CTRL|SHIFT|ALT|META)+\+)?[0-9|a-z])\s((?>no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(?>.+\.glsl)?""))(?>; show-text ""([^""""]*)"")?$";
         public static string patternKeybind = @"^(?>(CTRL|ALT|SHIFT|META)\+)?([0-9a-z])$";
         public static string patternCommand = @"^(no-osd\schange-list\sglsl-shaders\s(?>set|clr))\s(?>""(.+\.glsl)?"")$";
-
         public static bool ContainsWordChar(string str)
         {
             return Regex.IsMatch(str, @"\W");

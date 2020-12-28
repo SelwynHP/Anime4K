@@ -17,6 +17,11 @@ namespace shader_configurator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if (String.IsNullOrEmpty(Properties.Settings.Default.ShaderRootDirectory))
+            {
+                Properties.Settings.Default.ShaderRootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\mpv\\shaders";
+                Properties.Settings.Default.Save();
+            }
             Application.Run(new ControlForm());
         }
     }

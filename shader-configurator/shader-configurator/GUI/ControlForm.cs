@@ -231,5 +231,17 @@ namespace shader_configurator.GUI
             SetPreview();
             SetControlList();
         }
+
+        private void buttonApply_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ShaderRootDirectory = textBoxShaderRootDirectory.Text;
+            Properties.Settings.Default.Save();
+            MessageBox.Show("Settings Saved!", "Confirmation");
+        }
+
+        private void tabControlMain_Selected(object sender, TabControlEventArgs e)
+        {
+            textBoxShaderRootDirectory.Text = Properties.Settings.Default.ShaderRootDirectory;
+        }
     }
 }
