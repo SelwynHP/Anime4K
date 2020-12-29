@@ -237,7 +237,6 @@
             this.listBoxShaders.Name = "listBoxShaders";
             this.listBoxShaders.Size = new System.Drawing.Size(233, 82);
             this.listBoxShaders.TabIndex = 17;
-            this.listBoxShaders.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.listBoxShaders_ControlAdded);
             // 
             // textBoxBinding3
             // 
@@ -309,7 +308,6 @@
             this.textBoxBindings.Name = "textBoxBindings";
             this.textBoxBindings.Size = new System.Drawing.Size(225, 21);
             this.textBoxBindings.TabIndex = 7;
-            this.textBoxBindings.TextChanged += new System.EventHandler(this.textBoxBindings_TextChanged);
             // 
             // comboBoxCommand
             // 

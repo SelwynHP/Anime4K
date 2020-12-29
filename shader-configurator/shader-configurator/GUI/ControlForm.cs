@@ -74,31 +74,30 @@ namespace shader_configurator.GUI
             InitializeComponent();
             InitializeControls();
         }
-
+        //########################## Main Tab ##########################
         private void buttonSetBinding_Click(object sender, EventArgs e)
         {
             Keybind kb = new Keybind();
             try
             {
-                kb.FirstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum),comboBoxBinding1.SelectedItem.ToString());
+                kb.FirstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum), comboBoxBinding1.SelectedItem.ToString());
                 kb.SecondKey = textBoxBinding3.Text;
             }
-            catch(NullReferenceException nre)
+            catch (NullReferenceException nre)
             {
                 MessageBox.Show("Missing Argument Detected. Please try again with the appropriate arguments.\n" + nre.Message, "Error");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("An error has occured while capturing binding. Please try again.\n" + ex.Message, "Error");
             }
-            if(kb != new Keybind())
+            if (kb != new Keybind())
             {
                 myControl.keybind = kb;
             }
             SetPreview();
             SetControls();
         }
-
         private void buttonUnsetBinding_Click(object sender, EventArgs e)
         {
             myControl.keybind.FirstKey = KeybindEnum.EMPTY;
@@ -106,14 +105,72 @@ namespace shader_configurator.GUI
             SetPreview();
             SetControls();
         }
+        private void buttonSetComment_Click(object sender, EventArgs e)
+        {
+            myControl.Comment = textBoxComment.Text;
+            textBoxComment.ReadOnly = true;
+            SetPreview();
+            SetControls();
+        }
+        private void buttonUnsetComment_Click(object sender, EventArgs e)
+        {
+            myControl.Comment = "";
+            textBoxComment.ReadOnly = false;
+            SetPreview();
+            SetControls();
+        }
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Warning! This action will delete all of the currently saved profiles!\nAre you sure you would like to proceed", "Warning", MessageBoxButtons.YesNoCancel);
+            if (result == DialogResult.Yes)
+            {
+                ControlManagement.SetControls();
+                MessageBox.Show("List of profiles were set to default");
+            }
+            else if (result == DialogResult.No)
+            {
+                MessageBox.Show("No changes were made.");
+            }
 
+            SetPreview();
+            SetControlList();
+        }
+        private void buttonDeleteProfile_Click(object sender, EventArgs e)
+        {
+            Control selectedControl = (Control)listBoxControls.SelectedItem;
+            if (selectedControl != null)
+            {
+                shader_configurator.DAL.ControlManagement.DeleteControl(selectedControl);
+                buttonUpdateProfile.Enabled = false;
+                buttonDeleteProfile.Enabled = false;
+            }
+            SetControlList();
+        }
+        private void buttonUpdateProfile_Click(object sender, EventArgs e)
+        {
+            Control oldControl = (Control)listBoxControls.SelectedItem;
+            if (oldControl != null)
+            {
+                shader_configurator.DAL.ControlManagement.UpdateControl(oldControl, myControl);
+                buttonUpdateProfile.Enabled = false;
+                buttonDeleteProfile.Enabled = false;
+            }
+            SetControlList();
+        }
+        private void buttonAddProfile_Click(object sender, EventArgs e)
+        {
+            if (myControl != null)
+            {
+                shader_configurator.DAL.ControlManagement.SetControl(myControl);
+            }
+            SetControlList();
+        }
         private void buttonSetShader_Click(object sender, EventArgs e)
         {
             myControl.command.values.Add((ShaderEnum)comboBoxShader.SelectedItem);
             SetPreview();
             SetControls();
         }
-
         private void buttonUnsetShader_Click(object sender, EventArgs e)
         {
             if(listBoxShaders.SelectedItem != null)
@@ -123,47 +180,16 @@ namespace shader_configurator.GUI
             SetPreview();
             SetControls();
         }
-
-        private void textBoxBindings_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void listBoxShaders_ControlAdded(object sender, ControlEventArgs e)
-        {
-        }
-
         private void buttonClearShader_Click(object sender, EventArgs e)
         {
             myControl.command.values.Clear();
             SetPreview();
             SetControls();
         }
-
-        private void buttonAddProfile_Click(object sender, EventArgs e)
-        {
-            if(myControl != null)
-            {
-                shader_configurator.DAL.ControlManagement.SetControl(myControl);
-            }
-            SetControlList();
-        }
-
-        private void buttonUpdateProfile_Click(object sender, EventArgs e)
-        {
-            Control oldControl = (Control)listBoxControls.SelectedItem;
-            if(oldControl != null)
-            {
-                shader_configurator.DAL.ControlManagement.UpdateControl(oldControl, myControl);
-                buttonUpdateProfile.Enabled = false;
-                buttonDeleteProfile.Enabled = false;
-            }
-            SetControlList();
-        }
-
         private void listBoxControls_SelectedIndexChanged(object sender, EventArgs e)
         {
             Control selectedControl = (Control)listBoxControls.SelectedItem;
-            if(selectedControl != null)
+            if (selectedControl != null)
             {
                 myControl = new Control(selectedControl.Output());
                 buttonUpdateProfile.Enabled = true;
@@ -177,60 +203,26 @@ namespace shader_configurator.GUI
             SetPreview();
             SetControls();
         }
-
-        private void buttonDeleteProfile_Click(object sender, EventArgs e)
+        //########################## Settings Tab ##########################
+        private void tabControlMain_Selected(object sender, TabControlEventArgs e)
         {
-            Control selectedControl = (Control)listBoxControls.SelectedItem;
-            if (selectedControl != null)
-            {
-                shader_configurator.DAL.ControlManagement.DeleteControl(selectedControl);
-                buttonUpdateProfile.Enabled = false;
-                buttonDeleteProfile.Enabled = false;
-            }
-            SetControlList();
+            textBoxShaderRootDirectory.Text = Properties.Settings.Default.ShaderRootDirectory;
+            textBoxShaderCopyRootDirectory.Text = Properties.Settings.Default.ShaderCopyRootDirectory;
         }
-
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBoxShaderRootDirectory.Text = folderBrowserDialog1.SelectedPath;
             }
         }
-
-        private void buttonSetComment_Click(object sender, EventArgs e)
+        private void buttonBrowse2_Click(object sender, EventArgs e)
         {
-            myControl.Comment = textBoxComment.Text;
-            textBoxComment.ReadOnly = true;
-            SetPreview();
-            SetControls();
-        }
-
-        private void buttonUnsetComment_Click(object sender, EventArgs e)
-        {
-            myControl.Comment = "";
-            textBoxComment.ReadOnly = false;
-            SetPreview();
-            SetControls();
-        }
-
-        private void buttonReset_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Warning! This action will delete all of the currently saved profiles!\nAre you sure you would like to proceed", "Warning", MessageBoxButtons.YesNoCancel);
-            if(result == DialogResult.Yes)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                ControlManagement.SetControls();
-                MessageBox.Show("List of profiles were set to default");
+                textBoxShaderCopyRootDirectory.Text = folderBrowserDialog1.SelectedPath;
             }
-            else if(result == DialogResult.No)
-            {
-                MessageBox.Show("No changes were made.");
-            }
-
-            SetPreview();
-            SetControlList();
         }
-
         private void buttonApply_Click(object sender, EventArgs e)
         {
             //Getting and Setting ShaderRootDirectory
@@ -241,20 +233,6 @@ namespace shader_configurator.GUI
             Properties.Settings.Default.Save();
             //Display confirmation
             MessageBox.Show("Settings Saved!", "Confirmation");
-        }
-
-        private void tabControlMain_Selected(object sender, TabControlEventArgs e)
-        {
-            textBoxShaderRootDirectory.Text = Properties.Settings.Default.ShaderRootDirectory;
-            textBoxShaderCopyRootDirectory.Text = Properties.Settings.Default.ShaderCopyRootDirectory;
-        }
-
-        private void buttonBrowse2_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                textBoxShaderCopyRootDirectory.Text = folderBrowserDialog1.SelectedPath;
-            }
         }
     }
 }
