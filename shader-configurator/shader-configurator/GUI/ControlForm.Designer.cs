@@ -56,10 +56,13 @@
             this.comboBoxBinding1 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonBrowse = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelShaderRootDirectory = new System.Windows.Forms.Label();
             this.buttonApply = new System.Windows.Forms.Button();
             this.textBoxShaderRootDirectory = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.buttonBrowse2 = new System.Windows.Forms.Button();
+            this.labelShaderCopyRootDirectory = new System.Windows.Forms.Label();
+            this.textBoxShaderCopyRootDirectory = new System.Windows.Forms.TextBox();
             this.tabControlMain.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -104,7 +107,7 @@
             this.TabPage1.Controls.Add(this.comboBoxBinding1);
             this.TabPage1.Location = new System.Drawing.Point(4, 22);
             this.TabPage1.Name = "TabPage1";
-            this.TabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.TabPage1.Size = new System.Drawing.Size(695, 368);
             this.TabPage1.TabIndex = 0;
             this.TabPage1.Text = "Main";
@@ -336,13 +339,16 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonBrowse2);
+            this.tabPage2.Controls.Add(this.labelShaderCopyRootDirectory);
+            this.tabPage2.Controls.Add(this.textBoxShaderCopyRootDirectory);
             this.tabPage2.Controls.Add(this.buttonBrowse);
-            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.labelShaderRootDirectory);
             this.tabPage2.Controls.Add(this.buttonApply);
             this.tabPage2.Controls.Add(this.textBoxShaderRootDirectory);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(695, 368);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
@@ -358,14 +364,14 @@
             this.buttonBrowse.UseVisualStyleBackColor = true;
             this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
-            // label1
+            // labelShaderRootDirectory
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(94, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Shader Root Directory";
+            this.labelShaderRootDirectory.AutoSize = true;
+            this.labelShaderRootDirectory.Location = new System.Drawing.Point(94, 24);
+            this.labelShaderRootDirectory.Name = "labelShaderRootDirectory";
+            this.labelShaderRootDirectory.Size = new System.Drawing.Size(112, 13);
+            this.labelShaderRootDirectory.TabIndex = 2;
+            this.labelShaderRootDirectory.Text = "Shader Root Directory";
             // 
             // buttonApply
             // 
@@ -383,6 +389,32 @@
             this.textBoxShaderRootDirectory.Name = "textBoxShaderRootDirectory";
             this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(397, 20);
             this.textBoxShaderRootDirectory.TabIndex = 0;
+            // 
+            // buttonBrowse2
+            // 
+            this.buttonBrowse2.Location = new System.Drawing.Point(500, 79);
+            this.buttonBrowse2.Name = "buttonBrowse2";
+            this.buttonBrowse2.Size = new System.Drawing.Size(75, 20);
+            this.buttonBrowse2.TabIndex = 6;
+            this.buttonBrowse2.Text = "Browse";
+            this.buttonBrowse2.UseVisualStyleBackColor = true;
+            this.buttonBrowse2.Click += new System.EventHandler(this.buttonBrowse2_Click);
+            // 
+            // labelShaderCopyRootDirectory
+            // 
+            this.labelShaderCopyRootDirectory.AutoSize = true;
+            this.labelShaderCopyRootDirectory.Location = new System.Drawing.Point(94, 63);
+            this.labelShaderCopyRootDirectory.Name = "labelShaderCopyRootDirectory";
+            this.labelShaderCopyRootDirectory.Size = new System.Drawing.Size(139, 13);
+            this.labelShaderCopyRootDirectory.TabIndex = 5;
+            this.labelShaderCopyRootDirectory.Text = "Shader Copy Root Directory";
+            // 
+            // textBoxShaderCopyRootDirectory
+            // 
+            this.textBoxShaderCopyRootDirectory.Location = new System.Drawing.Point(97, 79);
+            this.textBoxShaderCopyRootDirectory.Name = "textBoxShaderCopyRootDirectory";
+            this.textBoxShaderCopyRootDirectory.Size = new System.Drawing.Size(397, 20);
+            this.textBoxShaderCopyRootDirectory.TabIndex = 4;
             // 
             // ControlForm
             // 
@@ -422,7 +454,7 @@
         private System.Windows.Forms.Button buttonAddProfile;
         private System.Windows.Forms.Button buttonDeleteProfile;
         private System.Windows.Forms.Button buttonUpdateProfile;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelShaderRootDirectory;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.TextBox textBoxShaderRootDirectory;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
@@ -435,5 +467,8 @@
         private System.Windows.Forms.Label labelBindings;
         private System.Windows.Forms.Label labelPreview;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Button buttonBrowse2;
+        private System.Windows.Forms.Label labelShaderCopyRootDirectory;
+        private System.Windows.Forms.TextBox textBoxShaderCopyRootDirectory;
     }
 }

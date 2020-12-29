@@ -34,5 +34,17 @@ namespace shader_configurator.Properties {
                 this["ShaderRootDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ShaderCopyRootDirectory {
+            get {
+                return ((string)(this["ShaderCopyRootDirectory"]));
+            }
+            set {
+                this["ShaderCopyRootDirectory"] = value;
+            }
+        }
     }
 }

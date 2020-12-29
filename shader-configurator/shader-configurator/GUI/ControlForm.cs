@@ -233,14 +233,28 @@ namespace shader_configurator.GUI
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
+            //Getting and Setting ShaderRootDirectory
             Properties.Settings.Default.ShaderRootDirectory = textBoxShaderRootDirectory.Text;
+            //Getting and Setting ShaderCopyRootDirectory
+            Properties.Settings.Default.ShaderCopyRootDirectory = textBoxShaderCopyRootDirectory.Text;
+            //Saving changes to User Settings
             Properties.Settings.Default.Save();
+            //Display confirmation
             MessageBox.Show("Settings Saved!", "Confirmation");
         }
 
         private void tabControlMain_Selected(object sender, TabControlEventArgs e)
         {
             textBoxShaderRootDirectory.Text = Properties.Settings.Default.ShaderRootDirectory;
+            textBoxShaderCopyRootDirectory.Text = Properties.Settings.Default.ShaderCopyRootDirectory;
+        }
+
+        private void buttonBrowse2_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBoxShaderCopyRootDirectory.Text = folderBrowserDialog1.SelectedPath;
+            }
         }
     }
 }
