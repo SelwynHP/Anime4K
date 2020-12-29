@@ -176,7 +176,6 @@ namespace shader_configurator.GUI
             }
             SetPreview();
             SetControls();
-
         }
 
         private void buttonDeleteProfile_Click(object sender, EventArgs e)

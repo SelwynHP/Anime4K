@@ -28,7 +28,7 @@ namespace shader_configurator
                 if (match.Success)
                 {
                     this.command_name = match.Groups[1].Value;
-                    string[] line = match.Groups[2].Value.Replace("~~/shaders/", "").Trim('"').Split(';');
+                    string[] line = match.Groups[2].Value.Replace(Shader.defaultShaderDirectory, "").Trim('"').Split(';');
                     for (int i = 0; i < line.Length; i++)
                     {
                         if (!String.IsNullOrEmpty(line[i]))
