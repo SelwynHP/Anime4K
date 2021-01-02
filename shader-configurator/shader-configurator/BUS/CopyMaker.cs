@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.IO;
 
 namespace shader_configurator
 {
@@ -7,26 +8,14 @@ namespace shader_configurator
     {
         public static string Output(string str, int cpy)
         {
+            String st = Path.GetFileNameWithoutExtension(str);
+            String stExt = Path.GetExtension(str);
             StringBuilder sb = new StringBuilder();
-            if(cpy <= 1)
-            {
-                return str;
-            }
-            else
-            {
-                sb.Append(str);
-                string[] line;
-                line = str.Split('.');
-                for (int i = 1; i < cpy; i++)
-                {
-                    sb.Append(";");
-                    sb.Append(line[0]);
-                    sb.Append("(" + i + ")");
-                    sb.Append(".");
-                    sb.Append(line[1]);
-                }
-                return sb.ToString();
-            }
+            sb.Append(st);
+            sb.Append("(" + cpy + ")");
+            sb.Append(stExt);
+
+            return sb.ToString();
         }
     }
 }

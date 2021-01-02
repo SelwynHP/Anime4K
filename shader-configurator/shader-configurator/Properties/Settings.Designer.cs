@@ -46,5 +46,17 @@ namespace shader_configurator.Properties {
                 this["ShaderCopyRootDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int NumberOfCopies {
+            get {
+                return ((int)(this["NumberOfCopies"]));
+            }
+            set {
+                this["NumberOfCopies"] = value;
+            }
+        }
     }
 }

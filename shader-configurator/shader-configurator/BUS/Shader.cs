@@ -7,6 +7,7 @@ namespace shader_configurator
     public static class Shader
     {
         public static string defaultShaderDirectory = Properties.Settings.Default.ShaderRootDirectory + "\\";
+        public static string defaultShaderCopyDirectory = Properties.Settings.Default.ShaderCopyRootDirectory + "\\";
         public static Dictionary<ShaderEnum, string> shaders = new Dictionary<ShaderEnum, string>
         {
             { ShaderEnum.ACNet, "ACNet.glsl" },

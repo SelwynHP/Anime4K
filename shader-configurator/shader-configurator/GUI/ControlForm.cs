@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace shader_configurator.GUI
 {
@@ -42,6 +43,7 @@ namespace shader_configurator.GUI
             comboBoxCommand.Text = "Default";
             comboBoxShader.SelectedIndex = 0;
             if(comboBoxCommand.Text == "Default") { myControl.command.command_name = "no-osd change-list glsl-shaders set"; }
+            comboBoxCopies.SelectedIndex = 0;
         }
         public void SetPreview()
         {
@@ -208,6 +210,7 @@ namespace shader_configurator.GUI
         {
             textBoxShaderRootDirectory.Text = Properties.Settings.Default.ShaderRootDirectory;
             textBoxShaderCopyRootDirectory.Text = Properties.Settings.Default.ShaderCopyRootDirectory;
+            comboBoxCopies.SelectedIndex = Properties.Settings.Default.NumberOfCopies;
         }
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
@@ -225,14 +228,53 @@ namespace shader_configurator.GUI
         }
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            //Getting and Setting ShaderRootDirectory
+            //Setting ShaderRootDirectory
             Properties.Settings.Default.ShaderRootDirectory = textBoxShaderRootDirectory.Text;
-            //Getting and Setting ShaderCopyRootDirectory
+            //Setting ShaderCopyRootDirectory
             Properties.Settings.Default.ShaderCopyRootDirectory = textBoxShaderCopyRootDirectory.Text;
+            //Setting NumberOfCopies
+            Properties.Settings.Default.NumberOfCopies = Convert.ToInt32(comboBoxCopies.SelectedItem.ToString());
+            buttonCopy_Click(this, null);
             //Saving changes to User Settings
             Properties.Settings.Default.Save();
             //Display confirmation
             MessageBox.Show("Settings Saved!", "Confirmation");
+        }
+
+        private void buttonCopy_Click(object sender, EventArgs e)
+        {
+            int copies = Convert.ToInt32(comboBoxCopies.SelectedItem);
+            //Check if Copy Directory exists
+            if (Directory.Exists(Shader.defaultShaderCopyDirectory))
+            {
+                //Clear all the files of the directory
+                String[] filePaths = Directory.GetFiles(Shader.defaultShaderCopyDirectory);
+                foreach(string file in filePaths)
+                {
+                    File.Delete(file);
+                }
+                //Each File gets a new filename and is copied to the destination path
+                foreach(var shader in Shader.shaders)
+                {
+                    for(int i = 1; i <= copies; i++)
+                    {
+                        String sourceFile = Path.Combine(Shader.defaultShaderDirectory, shader.Value);
+                        //CopyMaker.Output add the number(i) to the filename and returns the string
+                        String destFile = Path.Combine(Shader.defaultShaderCopyDirectory, CopyMaker.Output(shader.Value, i));
+                        if (!File.Exists(destFile))
+                        {
+                            File.Copy(sourceFile, destFile);
+                        }
+                    }
+                }
+                MessageBox.Show("Copy Completed");
+            }
+            else
+            {
+                //Missing Directory is created
+                Directory.CreateDirectory(Shader.defaultShaderCopyDirectory);
+                MessageBox.Show("Directory " + Shader.defaultShaderCopyDirectory + " created!");
+            }
         }
     }
 }

@@ -55,14 +55,17 @@
             this.listBoxControls = new System.Windows.Forms.ListBox();
             this.comboBoxBinding1 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonBrowse2 = new System.Windows.Forms.Button();
+            this.labelShaderCopyRootDirectory = new System.Windows.Forms.Label();
+            this.textBoxShaderCopyRootDirectory = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.labelShaderRootDirectory = new System.Windows.Forms.Label();
             this.buttonApply = new System.Windows.Forms.Button();
             this.textBoxShaderRootDirectory = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.buttonBrowse2 = new System.Windows.Forms.Button();
-            this.labelShaderCopyRootDirectory = new System.Windows.Forms.Label();
-            this.textBoxShaderCopyRootDirectory = new System.Windows.Forms.TextBox();
+            this.buttonCopy = new System.Windows.Forms.Button();
+            this.labelCopies = new System.Windows.Forms.Label();
+            this.comboBoxCopies = new System.Windows.Forms.ComboBox();
             this.tabControlMain.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -337,6 +340,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.comboBoxCopies);
+            this.tabPage2.Controls.Add(this.buttonCopy);
+            this.tabPage2.Controls.Add(this.labelCopies);
             this.tabPage2.Controls.Add(this.buttonBrowse2);
             this.tabPage2.Controls.Add(this.labelShaderCopyRootDirectory);
             this.tabPage2.Controls.Add(this.textBoxShaderCopyRootDirectory);
@@ -351,6 +357,32 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonBrowse2
+            // 
+            this.buttonBrowse2.Location = new System.Drawing.Point(500, 79);
+            this.buttonBrowse2.Name = "buttonBrowse2";
+            this.buttonBrowse2.Size = new System.Drawing.Size(75, 20);
+            this.buttonBrowse2.TabIndex = 6;
+            this.buttonBrowse2.Text = "Browse";
+            this.buttonBrowse2.UseVisualStyleBackColor = true;
+            this.buttonBrowse2.Click += new System.EventHandler(this.buttonBrowse2_Click);
+            // 
+            // labelShaderCopyRootDirectory
+            // 
+            this.labelShaderCopyRootDirectory.AutoSize = true;
+            this.labelShaderCopyRootDirectory.Location = new System.Drawing.Point(94, 63);
+            this.labelShaderCopyRootDirectory.Name = "labelShaderCopyRootDirectory";
+            this.labelShaderCopyRootDirectory.Size = new System.Drawing.Size(139, 13);
+            this.labelShaderCopyRootDirectory.TabIndex = 5;
+            this.labelShaderCopyRootDirectory.Text = "Shader Copy Root Directory";
+            // 
+            // textBoxShaderCopyRootDirectory
+            // 
+            this.textBoxShaderCopyRootDirectory.Location = new System.Drawing.Point(97, 79);
+            this.textBoxShaderCopyRootDirectory.Name = "textBoxShaderCopyRootDirectory";
+            this.textBoxShaderCopyRootDirectory.Size = new System.Drawing.Size(397, 20);
+            this.textBoxShaderCopyRootDirectory.TabIndex = 4;
             // 
             // buttonBrowse
             // 
@@ -388,31 +420,45 @@
             this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(397, 20);
             this.textBoxShaderRootDirectory.TabIndex = 0;
             // 
-            // buttonBrowse2
+            // buttonCopy
             // 
-            this.buttonBrowse2.Location = new System.Drawing.Point(500, 79);
-            this.buttonBrowse2.Name = "buttonBrowse2";
-            this.buttonBrowse2.Size = new System.Drawing.Size(75, 20);
-            this.buttonBrowse2.TabIndex = 6;
-            this.buttonBrowse2.Text = "Browse";
-            this.buttonBrowse2.UseVisualStyleBackColor = true;
-            this.buttonBrowse2.Click += new System.EventHandler(this.buttonBrowse2_Click);
+            this.buttonCopy.Location = new System.Drawing.Point(500, 118);
+            this.buttonCopy.Name = "buttonCopy";
+            this.buttonCopy.Size = new System.Drawing.Size(75, 20);
+            this.buttonCopy.TabIndex = 9;
+            this.buttonCopy.Text = "Copy";
+            this.buttonCopy.UseVisualStyleBackColor = true;
+            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             // 
-            // labelShaderCopyRootDirectory
+            // labelCopies
             // 
-            this.labelShaderCopyRootDirectory.AutoSize = true;
-            this.labelShaderCopyRootDirectory.Location = new System.Drawing.Point(94, 63);
-            this.labelShaderCopyRootDirectory.Name = "labelShaderCopyRootDirectory";
-            this.labelShaderCopyRootDirectory.Size = new System.Drawing.Size(139, 13);
-            this.labelShaderCopyRootDirectory.TabIndex = 5;
-            this.labelShaderCopyRootDirectory.Text = "Shader Copy Root Directory";
+            this.labelCopies.AutoSize = true;
+            this.labelCopies.Location = new System.Drawing.Point(94, 102);
+            this.labelCopies.Name = "labelCopies";
+            this.labelCopies.Size = new System.Drawing.Size(91, 13);
+            this.labelCopies.TabIndex = 8;
+            this.labelCopies.Text = "Number of Copies";
             // 
-            // textBoxShaderCopyRootDirectory
+            // comboBoxCopies
             // 
-            this.textBoxShaderCopyRootDirectory.Location = new System.Drawing.Point(97, 79);
-            this.textBoxShaderCopyRootDirectory.Name = "textBoxShaderCopyRootDirectory";
-            this.textBoxShaderCopyRootDirectory.Size = new System.Drawing.Size(397, 20);
-            this.textBoxShaderCopyRootDirectory.TabIndex = 4;
+            this.comboBoxCopies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCopies.FormattingEnabled = true;
+            this.comboBoxCopies.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxCopies.Location = new System.Drawing.Point(97, 117);
+            this.comboBoxCopies.Name = "comboBoxCopies";
+            this.comboBoxCopies.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCopies.TabIndex = 10;
             // 
             // ControlForm
             // 
@@ -468,5 +514,8 @@
         private System.Windows.Forms.Button buttonBrowse2;
         private System.Windows.Forms.Label labelShaderCopyRootDirectory;
         private System.Windows.Forms.TextBox textBoxShaderCopyRootDirectory;
+        private System.Windows.Forms.ComboBox comboBoxCopies;
+        private System.Windows.Forms.Button buttonCopy;
+        private System.Windows.Forms.Label labelCopies;
     }
 }
