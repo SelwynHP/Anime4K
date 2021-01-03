@@ -1,5 +1,6 @@
 ﻿using shader_configurator.VAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -28,7 +29,12 @@ namespace shader_configurator
                 if (match.Success)
                 {
                     this.command_name = match.Groups[1].Value;
-                    string[] line = match.Groups[2].Value.Replace(Shader.defaultShaderDirectory, "").Trim('"').Split(';');
+                    //Removing paths from strings
+                    string[] line = match.Groups[2].Value.Replace(Shader.defaultShaderCopyDirectory, "").Replace(Shader.defaultShaderDirectory, "").Trim('"').Split(';');
+                    //Removing (*) from copies
+                    Regex r = new Regex(@"\(\d\)");
+                    for (int i = 0; i < line.Length; i++) { line[i] = r.Replace(line[i], ""); }
+                    //Getting Matching value from Shader Dictionary
                     for (int i = 0; i < line.Length; i++)
                     {
                         if (!String.IsNullOrEmpty(line[i]))
@@ -46,10 +52,26 @@ namespace shader_configurator
 
         public string ValueOutput()
         {
+            Dictionary<ShaderEnum,int> dList = new Dictionary<ShaderEnum, int>();
             StringBuilder sb = new StringBuilder();
             foreach(ShaderEnum element in this.values)
             {
-                sb.Append(Shader.GetValue(element));
+                //If dList contains the shader being iterated, the main(Original Copy) is already used. So we the copies.
+                if (dList.ContainsKey(element))
+                {
+                    String[] line = Shader.GetValue(element, Shader.defaultShaderCopyDirectory).Split('.');
+                    sb.Append(line[0]);
+                    sb.Append("(" + dList[element] + ")");
+                    sb.Append(".");
+                    sb.Append(line[1]);
+                    dList[element]++;
+                }
+                //Else we use the main and the shader to the dList
+                else
+                {
+                    sb.Append(Shader.GetValue(element));
+                    dList.Add(element, 1);
+                }
                 sb.Append(";");
             }
             string str = @"""" + sb.ToString().TrimEnd(';') + @"""";
