@@ -71,6 +71,10 @@ namespace shader_configurator.GUI
                 listBoxControls.Items.Add(element);
             }
         }
+        public DialogResult GetTaskConfirmation(String str)
+        {
+            return MessageBox.Show("Are you sure you want to perform the following action?\n\t" + str, "Action Confirmation!",MessageBoxButtons.YesNo);
+        }
         public ControlForm()
         {
             InitializeComponent();
@@ -139,33 +143,42 @@ namespace shader_configurator.GUI
         }
         private void buttonDeleteProfile_Click(object sender, EventArgs e)
         {
-            Control selectedControl = (Control)listBoxControls.SelectedItem;
-            if (selectedControl != null)
+            if(GetTaskConfirmation("Delete Control") == DialogResult.Yes)
             {
-                shader_configurator.DAL.ControlManagement.DeleteControl(selectedControl);
-                buttonUpdateProfile.Enabled = false;
-                buttonDeleteProfile.Enabled = false;
+                Control selectedControl = (Control)listBoxControls.SelectedItem;
+                if (selectedControl != null)
+                {
+                    shader_configurator.DAL.ControlManagement.DeleteControl(selectedControl);
+                    buttonUpdateProfile.Enabled = false;
+                    buttonDeleteProfile.Enabled = false;
+                }
+                SetControlList();
             }
-            SetControlList();
         }
         private void buttonUpdateProfile_Click(object sender, EventArgs e)
         {
-            Control oldControl = (Control)listBoxControls.SelectedItem;
-            if (oldControl != null)
+            if(GetTaskConfirmation("Update Control") == DialogResult.Yes)
             {
-                shader_configurator.DAL.ControlManagement.UpdateControl(oldControl, myControl);
-                buttonUpdateProfile.Enabled = false;
-                buttonDeleteProfile.Enabled = false;
+                Control oldControl = (Control)listBoxControls.SelectedItem;
+                if (oldControl != null)
+                {
+                    shader_configurator.DAL.ControlManagement.UpdateControl(oldControl, myControl);
+                    buttonUpdateProfile.Enabled = false;
+                    buttonDeleteProfile.Enabled = false;
+                }
+                SetControlList();
             }
-            SetControlList();
         }
         private void buttonAddProfile_Click(object sender, EventArgs e)
         {
-            if (myControl != null)
+            if(GetTaskConfirmation("Add Control") == DialogResult.Yes)
             {
-                shader_configurator.DAL.ControlManagement.SetControl(myControl);
+                if (myControl != null)
+                {
+                    shader_configurator.DAL.ControlManagement.SetControl(myControl);
+                }
+                SetControlList();
             }
-            SetControlList();
         }
         private void buttonSetShader_Click(object sender, EventArgs e)
         {
