@@ -9,6 +9,19 @@ namespace shader_configurator
 {
     static class Program
     {
+        static void SetDefaultDirectories()
+        {
+            if (String.IsNullOrEmpty(Properties.Settings.Default.ShaderRootDirectory))
+            {
+                Properties.Settings.Default.ShaderRootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\mpv\\shaders";
+                Properties.Settings.Default.Save();
+            }
+            if (String.IsNullOrEmpty(Properties.Settings.Default.ShaderCopyRootDirectory))
+            {
+                Properties.Settings.Default.ShaderCopyRootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\mpv\\shaders\\copy";
+                Properties.Settings.Default.Save();
+            }
+        }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,11 +30,7 @@ namespace shader_configurator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (String.IsNullOrEmpty(Properties.Settings.Default.ShaderRootDirectory))
-            {
-                Properties.Settings.Default.ShaderRootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\mpv\\shaders";
-                Properties.Settings.Default.Save();
-            }
+            SetDefaultDirectories();
             Application.Run(new ControlForm());
         }
     }
