@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shader-configurator", "shader-configurator\shader-configurator.csproj", "{C879B87E-EA73-44E9-9B1A-9094CAF07341}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{15781C3F-B70B-446D-9E3D-7EBF33C95935}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{15781C3F-B70B-446D-9E3D-7EBF33C95935}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

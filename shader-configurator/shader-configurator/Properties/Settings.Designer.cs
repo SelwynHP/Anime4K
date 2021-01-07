@@ -25,7 +25,7 @@ namespace shader_configurator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\HayatoS\\AppData\\Roaming\\mpv\\shaders")]
         public string ShaderRootDirectory {
             get {
                 return ((string)(this["ShaderRootDirectory"]));
@@ -37,7 +37,7 @@ namespace shader_configurator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\HayatoS\\AppData\\Roaming\\mpv\\shaders\\copy")]
         public string ShaderCopyRootDirectory {
             get {
                 return ((string)(this["ShaderCopyRootDirectory"]));
