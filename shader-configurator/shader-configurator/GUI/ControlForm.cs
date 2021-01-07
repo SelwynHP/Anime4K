@@ -247,7 +247,6 @@ namespace shader_configurator.GUI
             Properties.Settings.Default.ShaderCopyRootDirectory = textBoxShaderCopyRootDirectory.Text;
             //Setting NumberOfCopies
             Properties.Settings.Default.NumberOfCopies = Convert.ToInt32(comboBoxCopies.SelectedItem.ToString());
-            buttonCopy_Click(this, null);
             //Saving changes to User Settings
             Properties.Settings.Default.Save();
             //Display confirmation
@@ -260,28 +259,37 @@ namespace shader_configurator.GUI
             //Check if Copy Directory exists
             if (Directory.Exists(Shader.defaultShaderCopyDirectory))
             {
-                //Clear all the files of the directory
-                String[] filePaths = Directory.GetFiles(Shader.defaultShaderCopyDirectory);
-                foreach(string file in filePaths)
+                DialogResult result = MessageBox.Show("All files in the following directory will be deleted:\n\t" + Shader.defaultShaderCopyDirectory
+                     + "\n Do you wish to continue?", "Overwrite confirmation!", MessageBoxButtons.YesNoCancel);
+                if(result == DialogResult.Yes)
                 {
-                    File.Delete(file);
-                }
-                //Each File gets a new filename and is copied to the destination path
-                foreach(var shader in Shader.shaders)
-                {
-                    for(int i = 1; i <= copies; i++)
+                    //Clear all the files of the directory
+                    String[] filePaths = Directory.GetFiles(Shader.defaultShaderCopyDirectory);
+                    foreach (string file in filePaths)
                     {
-                        String sourceFile = Path.Combine(Shader.defaultShaderDirectory, shader.Value);
-                        //CopyMaker.Output add the number(i) to the filename and returns the string
-                        String destFile = Path.Combine(Shader.defaultShaderCopyDirectory, CopyMaker.Output(shader.Value, i));
-                        if (!File.Exists(destFile))
+                        File.Delete(file);
+                    }
+                    //Each File gets a new filename and is copied to the destination path
+                    foreach (var shader in Shader.shaders)
+                    {
+                        for (int i = 1; i <= copies; i++)
                         {
-                            File.Copy(sourceFile, destFile);
+                            String sourceFile = Path.Combine(Shader.defaultShaderDirectory, shader.Value);
+                            //CopyMaker.Output add the number(i) to the filename and returns the string
+                            String destFile = Path.Combine(Shader.defaultShaderCopyDirectory, CopyMaker.Output(shader.Value, i));
+                            if (!File.Exists(destFile))
+                            {
+                                File.Copy(sourceFile, destFile);
+                            }
                         }
                     }
+                    MessageBox.Show("Copy Completed");
+                }//end second if
+                else
+                {
+                    MessageBox.Show("Copy was aborted");
                 }
-                MessageBox.Show("Copy Completed");
-            }
+            }//end first if
             else
             {
                 //Missing Directory is created
