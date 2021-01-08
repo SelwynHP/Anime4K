@@ -1,4 +1,5 @@
-﻿using shader_configurator.GUI;
+﻿using shader_configurator.DAL;
+using shader_configurator.GUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace shader_configurator
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SetDefaultDirectories();
+            ControlManagement.CreateMPVInput();
             Application.Run(new ControlForm());
         }
     }

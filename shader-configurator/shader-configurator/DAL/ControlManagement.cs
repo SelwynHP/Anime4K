@@ -25,6 +25,15 @@ namespace shader_configurator.DAL
                 new Control(String.Format(@"CTRL+6 no-osd change-list glsl-shaders set ""{0}Anime4K_Denoise_Bilateral_Mode.glsl;{0}Anime4K_Deblur_DoG.glsl;{0}Anime4K_DarkLines_HQ.glsl;{0}Anime4K_ThinLines_HQ.glsl;{0}Anime4K_Upscale_CNN_M_x2_Deblur.glsl""; show-text ""Anime4k: 1080p (Perceptual Quality and Deblur)""",Shader.defaultShaderDirectory)),
                 new Control(@"CTRL+0 no-osd change-list glsl-shaders clr """"; show-text ""GLSL shaders cleared""")
             };
+        public static void CreateMPVInput() 
+        {
+            if (!File.Exists(filepath))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(filepath));
+                File.Create(filepath).Close();
+                SetControls();
+            }
+        }
         public static List<Control> GetControls()
         {
             List<Control> cList = new List<Control>();
