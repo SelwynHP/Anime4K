@@ -257,14 +257,14 @@ namespace shader_configurator.GUI
         {
             int copies = Convert.ToInt32(comboBoxCopies.SelectedItem);
             //Check if Copy Directory exists
-            if (Directory.Exists(Shader.defaultShaderCopyDirectory))
+            if (Directory.Exists(Shader.GetShaderCopyRootDirectory()))
             {
-                DialogResult result = MessageBox.Show("All files in the following directory will be deleted:\n\t" + Shader.defaultShaderCopyDirectory
+                DialogResult result = MessageBox.Show("All files in the following directory will be deleted:\n\t" + Shader.GetShaderCopyRootDirectory()
                      + "\n Do you wish to continue?", "Overwrite confirmation!", MessageBoxButtons.YesNoCancel);
                 if(result == DialogResult.Yes)
                 {
                     //Clear all the files of the directory
-                    String[] filePaths = Directory.GetFiles(Shader.defaultShaderCopyDirectory);
+                    String[] filePaths = Directory.GetFiles(Shader.GetShaderCopyRootDirectory());
                     foreach (string file in filePaths)
                     {
                         File.Delete(file);
@@ -274,12 +274,16 @@ namespace shader_configurator.GUI
                     {
                         for (int i = 1; i <= copies; i++)
                         {
-                            String sourceFile = Path.Combine(Shader.defaultShaderDirectory, shader.Value);
+                            String sourceFile = Path.Combine(Shader.GetShaderRootDirectory(), shader.Value);
                             //CopyMaker.Output add the number(i) to the filename and returns the string
-                            String destFile = Path.Combine(Shader.defaultShaderCopyDirectory, CopyMaker.Output(shader.Value, i));
+                            String destFile = Path.Combine(Shader.GetShaderCopyRootDirectory(), CopyMaker.Output(shader.Value, i));
                             if (!File.Exists(destFile))
                             {
-                                File.Copy(sourceFile, destFile);
+                                try
+                                {
+                                    File.Copy(sourceFile, destFile);
+                                }
+                                catch (IOException ex) { break; }
                             }
                         }
                     }
@@ -293,8 +297,8 @@ namespace shader_configurator.GUI
             else
             {
                 //Missing Directory is created
-                Directory.CreateDirectory(Shader.defaultShaderCopyDirectory);
-                MessageBox.Show("Directory " + Shader.defaultShaderCopyDirectory + " created!");
+                Directory.CreateDirectory(Shader.GetShaderCopyRootDirectory());
+                MessageBox.Show("Directory " + Shader.GetShaderCopyRootDirectory() + " created!");
             }
         }
     }
