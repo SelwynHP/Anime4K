@@ -30,7 +30,7 @@ namespace shader_configurator
                 {
                     this.command_name = match.Groups[1].Value;
                     //Removing paths from strings
-                    string[] line = match.Groups[2].Value.Replace(Shader.defaultShaderCopyDirectory, "").Replace(Shader.defaultShaderDirectory, "").Trim('"').Split(';');
+                    string[] line = match.Groups[2].Value.Replace(Shader.GetShaderCopyRootDirectory(), "").Replace(Shader.GetShaderRootDirectory(), "").Trim('"').Split(';');
                     //Removing (*) from copies
                     Regex r = new Regex(@"\(\d\)");
                     for (int i = 0; i < line.Length; i++) { line[i] = r.Replace(line[i], ""); }
@@ -59,7 +59,7 @@ namespace shader_configurator
                 //If dList contains the shader being iterated, the main(Original Copy) is already used. So we the copies.
                 if (dList.ContainsKey(element))
                 {
-                    String[] line = Shader.GetValue(element, Shader.defaultShaderCopyDirectory).Split('.');
+                    String[] line = Shader.GetValue(element, Shader.GetShaderCopyRootDirectory()).Split('.');
                     sb.Append(line[0]);
                     sb.Append("(" + dList[element] + ")");
                     sb.Append(".");
