@@ -1,15 +1,7 @@
 ﻿using shader_configurator.DAL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Common;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace shader_configurator.GUI
 {
@@ -22,7 +14,7 @@ namespace shader_configurator.GUI
             //Initialize Controls
             foreach (KeybindEnum element in Enum.GetValues(typeof(KeybindEnum)))
             {
-                comboBoxBinding1.Items.Add(element);
+                comboBoxBindingFirstKey.Items.Add(element);
             }
             //-----
             comboBoxCommand.Enabled = false;
@@ -38,8 +30,8 @@ namespace shader_configurator.GUI
             buttonDeleteProfile.Enabled = false;
             SetControlList();
             //Set Default Values
-            comboBoxBinding1.SelectedIndex = 1;
-            textBoxBinding3.Text = "1";
+            comboBoxBindingFirstKey.SelectedIndex = 1;
+            textBoxBindingSecondKey.Text = "1";
             comboBoxCommand.Text = "Default";
             comboBoxShader.SelectedIndex = 0;
             if(comboBoxCommand.Text == "Default") { myControl.command.command_name = "no-osd change-list glsl-shaders set"; }
@@ -47,24 +39,30 @@ namespace shader_configurator.GUI
         }
         public void SetPreview()
         {
+            //Sets output() of myControl to the preview field
             textBoxPreview.Text = myControl.Output();
         }
-        public void SetControls()
+        public void SetControlView()
         {
-            textBoxBindings.Text = "";
-            textBoxComment.Text = "";
-            listBoxShaders.Items.Clear();
-
-            comboBoxBinding1.SelectedItem = myControl.keybind.FirstKey;
-            textBoxBindings.Text = myControl.keybind.Output();
-            textBoxComment.Text = myControl.Comment;
-            foreach(ShaderEnum element in myControl.command.values)
+            //Sets elements of myControl to the view
+            try
             {
-                listBoxShaders.Items.Add(element);
+                comboBoxBindingFirstKey.SelectedItem = myControl.keybind.FirstKey;
+                textBoxBindingSecondKey.Text = myControl.keybind.SecondKey;
+                textBoxBindings.Text = myControl.keybind.Output();
+                textBoxComment.Text = myControl.Comment;
+                listBoxShaders.Items.Clear();
+                foreach (ShaderEnum element in myControl.command.values)
+                {
+                    listBoxShaders.Items.Add(element);
+                }
+                SetPreview();
             }
+            catch(Exception e) { }
         }
         public void SetControlList()
         {
+            //Sets list of Controls to listBoxControls
             listBoxControls.Items.Clear();
             foreach(Control element in shader_configurator.DAL.ControlManagement.GetControls())
             {
@@ -86,8 +84,8 @@ namespace shader_configurator.GUI
             Keybind kb = new Keybind();
             try
             {
-                kb.FirstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum), comboBoxBinding1.SelectedItem.ToString());
-                kb.SecondKey = textBoxBinding3.Text;
+                kb.FirstKey = (KeybindEnum)Enum.Parse(typeof(KeybindEnum), comboBoxBindingFirstKey.SelectedItem.ToString());
+                kb.SecondKey = textBoxBindingSecondKey.Text;
             }
             catch (NullReferenceException nre)
             {
@@ -101,29 +99,25 @@ namespace shader_configurator.GUI
             {
                 myControl.keybind = kb;
             }
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         private void buttonUnsetBinding_Click(object sender, EventArgs e)
         {
             myControl.keybind.FirstKey = KeybindEnum.EMPTY;
             myControl.keybind.SecondKey = "";
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         private void buttonSetComment_Click(object sender, EventArgs e)
         {
             myControl.Comment = textBoxComment.Text;
             textBoxComment.ReadOnly = true;
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         private void buttonUnsetComment_Click(object sender, EventArgs e)
         {
             myControl.Comment = "";
             textBoxComment.ReadOnly = false;
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         private void buttonReset_Click(object sender, EventArgs e)
         {
@@ -138,8 +132,7 @@ namespace shader_configurator.GUI
                 MessageBox.Show("No changes were made.");
             }
 
-            SetPreview();
-            SetControlList();
+            SetControlView();
         }
         private void buttonDeleteProfile_Click(object sender, EventArgs e)
         {
@@ -183,8 +176,7 @@ namespace shader_configurator.GUI
         private void buttonSetShader_Click(object sender, EventArgs e)
         {
             myControl.command.values.Add((ShaderEnum)comboBoxShader.SelectedItem);
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         private void buttonUnsetShader_Click(object sender, EventArgs e)
         {
@@ -192,14 +184,12 @@ namespace shader_configurator.GUI
             {
                 myControl.command.values.Remove((ShaderEnum)listBoxShaders.SelectedItem);
             }
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         private void buttonClearShader_Click(object sender, EventArgs e)
         {
             myControl.command.values.Clear();
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         private void listBoxControls_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -215,8 +205,7 @@ namespace shader_configurator.GUI
                 buttonUpdateProfile.Enabled = false;
                 buttonDeleteProfile.Enabled = false;
             }
-            SetPreview();
-            SetControls();
+            SetControlView();
         }
         //########################## Settings Tab ##########################
         private void tabControlMain_Selected(object sender, TabControlEventArgs e)

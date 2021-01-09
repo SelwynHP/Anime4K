@@ -43,7 +43,7 @@
             this.buttonAddProfile = new System.Windows.Forms.Button();
             this.buttonClearShader = new System.Windows.Forms.Button();
             this.listBoxShaders = new System.Windows.Forms.ListBox();
-            this.textBoxBinding3 = new System.Windows.Forms.TextBox();
+            this.textBoxBindingSecondKey = new System.Windows.Forms.TextBox();
             this.buttonUnsetShader = new System.Windows.Forms.Button();
             this.buttonSetShader = new System.Windows.Forms.Button();
             this.buttonUnsetBinding = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@
             this.textBoxBindings = new System.Windows.Forms.TextBox();
             this.comboBoxCommand = new System.Windows.Forms.ComboBox();
             this.listBoxControls = new System.Windows.Forms.ListBox();
-            this.comboBoxBinding1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxBindingFirstKey = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonBrowse2 = new System.Windows.Forms.Button();
             this.labelShaderCopyRootDirectory = new System.Windows.Forms.Label();
@@ -97,7 +97,7 @@
             this.TabPage1.Controls.Add(this.buttonAddProfile);
             this.TabPage1.Controls.Add(this.buttonClearShader);
             this.TabPage1.Controls.Add(this.listBoxShaders);
-            this.TabPage1.Controls.Add(this.textBoxBinding3);
+            this.TabPage1.Controls.Add(this.textBoxBindingSecondKey);
             this.TabPage1.Controls.Add(this.buttonUnsetShader);
             this.TabPage1.Controls.Add(this.buttonSetShader);
             this.TabPage1.Controls.Add(this.buttonUnsetBinding);
@@ -107,7 +107,7 @@
             this.TabPage1.Controls.Add(this.textBoxBindings);
             this.TabPage1.Controls.Add(this.comboBoxCommand);
             this.TabPage1.Controls.Add(this.listBoxControls);
-            this.TabPage1.Controls.Add(this.comboBoxBinding1);
+            this.TabPage1.Controls.Add(this.comboBoxBindingFirstKey);
             this.TabPage1.Location = new System.Drawing.Point(4, 22);
             this.TabPage1.Name = "TabPage1";
             this.TabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -243,10 +243,10 @@
             // 
             // textBoxBinding3
             // 
-            this.textBoxBinding3.Location = new System.Drawing.Point(210, 32);
-            this.textBoxBinding3.Name = "textBoxBinding3";
-            this.textBoxBinding3.Size = new System.Drawing.Size(71, 20);
-            this.textBoxBinding3.TabIndex = 16;
+            this.textBoxBindingSecondKey.Location = new System.Drawing.Point(210, 32);
+            this.textBoxBindingSecondKey.Name = "textBoxBindingSecondKey";
+            this.textBoxBindingSecondKey.Size = new System.Drawing.Size(71, 20);
+            this.textBoxBindingSecondKey.TabIndex = 16;
             // 
             // buttonUnsetShader
             // 
@@ -329,14 +329,14 @@
             this.listBoxControls.TabIndex = 3;
             this.listBoxControls.SelectedIndexChanged += new System.EventHandler(this.listBoxControls_SelectedIndexChanged);
             // 
-            // comboBoxBinding1
+            // comboBoxBinding
             // 
-            this.comboBoxBinding1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxBinding1.FormattingEnabled = true;
-            this.comboBoxBinding1.Location = new System.Drawing.Point(56, 32);
-            this.comboBoxBinding1.Name = "comboBoxBinding1";
-            this.comboBoxBinding1.Size = new System.Drawing.Size(148, 21);
-            this.comboBoxBinding1.TabIndex = 0;
+            this.comboBoxBindingFirstKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBindingFirstKey.FormattingEnabled = true;
+            this.comboBoxBindingFirstKey.Location = new System.Drawing.Point(56, 32);
+            this.comboBoxBindingFirstKey.Name = "comboBoxBindingFirstKey";
+            this.comboBoxBindingFirstKey.Size = new System.Drawing.Size(148, 21);
+            this.comboBoxBindingFirstKey.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -491,8 +491,8 @@
         private System.Windows.Forms.TextBox textBoxBindings;
         private System.Windows.Forms.ComboBox comboBoxCommand;
         private System.Windows.Forms.ListBox listBoxControls;
-        private System.Windows.Forms.ComboBox comboBoxBinding1;
-        private System.Windows.Forms.TextBox textBoxBinding3;
+        private System.Windows.Forms.ComboBox comboBoxBindingFirstKey;
+        private System.Windows.Forms.TextBox textBoxBindingSecondKey;
         private System.Windows.Forms.ListBox listBoxShaders;
         private System.Windows.Forms.Button buttonClearShader;
         private System.Windows.Forms.Button buttonAddProfile;
