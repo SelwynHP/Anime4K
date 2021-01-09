@@ -6,8 +6,6 @@ namespace shader_configurator
 {
     public static class Shader
     {
-        public static string defaultShaderDirectory = Properties.Settings.Default.ShaderRootDirectory.Replace("\\", "/") + "/";
-        public static string defaultShaderCopyDirectory = Properties.Settings.Default.ShaderCopyRootDirectory.Replace("\\", "/") + "/";
         public static Dictionary<ShaderEnum, string> shaders = new Dictionary<ShaderEnum, string>
         {
             { ShaderEnum.ACNet, "ACNet.glsl" },
@@ -47,8 +45,17 @@ namespace shader_configurator
             { ShaderEnum.UpscaleUltraDeblur, "Anime4K_Upscale_CNN_UL_x2_Deblur.glsl" },
             { ShaderEnum.UpscaleUltraDenoise, "Anime4K_Upscale_CNN_UL_x2_Denoise.glsl" }
         };
+        public static string GetShaderRootDirectory()
+        {
+            return Properties.Settings.Default.ShaderRootDirectory.Replace("\\", "/") + "/";
+        }
+        public static string GetShaderCopyRootDirectory()
+        {
+            return Properties.Settings.Default.ShaderCopyRootDirectory.Replace("\\", "/") + "/";
+        }
         public static string GetValue(ShaderEnum key)
         {
+            string defaultShaderDirectory = Properties.Settings.Default.ShaderRootDirectory.Replace("\\", "/") + "/";
             return defaultShaderDirectory + shaders[key];
         }
         public static string GetValue(ShaderEnum key,string shaderDirectory)
