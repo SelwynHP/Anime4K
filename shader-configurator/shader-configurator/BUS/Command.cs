@@ -31,11 +31,9 @@ namespace shader_configurator
                 {
                     this.command_name = match.Groups[1].Value;
                     //Removing paths from strings
-                    //  string[] line = match.Groups[2].Value.Replace(Shader.GetShaderCopyRootDirectory(), "").Replace(Shader.GetShaderRootDirectory(), "").Trim('"').Split(';');
                     List<String> sList = GetValues(match.Groups[2].Value);
                     //Removing (*) from copies
                     Regex r = new Regex(@"\(\d\)");
-                    //for (int i = 0; i < line.Length; i++) { line[i] = r.Replace(line[i], ""); }
                     for (int i = 0; i < sList.Count; i++) { sList[i] = r.Replace(sList[i], ""); }
                     //Getting Matching value from Shader Dictionary
                     for (int i = 0; i < sList.Count; i++)
