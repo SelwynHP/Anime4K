@@ -55,6 +55,7 @@
             this.listBoxControls = new System.Windows.Forms.ListBox();
             this.comboBoxBindingFirstKey = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.comboBoxCopies = new System.Windows.Forms.ComboBox();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.labelCopies = new System.Windows.Forms.Label();
@@ -63,10 +64,9 @@
             this.textBoxShaderCopyRootDirectory = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
             this.labelShaderRootDirectory = new System.Windows.Forms.Label();
-            this.buttonApply = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxShaderRootDirectory = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.buttonUpdate = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -350,7 +350,7 @@
             this.tabPage2.Controls.Add(this.textBoxShaderCopyRootDirectory);
             this.tabPage2.Controls.Add(this.buttonBrowse);
             this.tabPage2.Controls.Add(this.labelShaderRootDirectory);
-            this.tabPage2.Controls.Add(this.buttonApply);
+            this.tabPage2.Controls.Add(this.buttonSave);
             this.tabPage2.Controls.Add(this.textBoxShaderRootDirectory);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -359,6 +359,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(581, 40);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 20);
+            this.buttonUpdate.TabIndex = 11;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // comboBoxCopies
             // 
@@ -445,15 +455,15 @@
             this.labelShaderRootDirectory.TabIndex = 2;
             this.labelShaderRootDirectory.Text = "Shader Root Directory";
             // 
-            // buttonApply
+            // buttonSave
             // 
-            this.buttonApply.Location = new System.Drawing.Point(500, 164);
-            this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(75, 23);
-            this.buttonApply.TabIndex = 1;
-            this.buttonApply.Text = "Apply";
-            this.buttonApply.UseVisualStyleBackColor = true;
-            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            this.buttonSave.Location = new System.Drawing.Point(500, 164);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(156, 23);
+            this.buttonSave.TabIndex = 1;
+            this.buttonSave.Text = "Save Settings";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonApply_Click);
             // 
             // textBoxShaderRootDirectory
             // 
@@ -461,16 +471,6 @@
             this.textBoxShaderRootDirectory.Name = "textBoxShaderRootDirectory";
             this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(397, 20);
             this.textBoxShaderRootDirectory.TabIndex = 0;
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Location = new System.Drawing.Point(581, 40);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(75, 20);
-            this.buttonUpdate.TabIndex = 11;
-            this.buttonUpdate.Text = "Update";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // ControlForm
             // 
@@ -511,7 +511,7 @@
         private System.Windows.Forms.Button buttonDeleteProfile;
         private System.Windows.Forms.Button buttonUpdateProfile;
         private System.Windows.Forms.Label labelShaderRootDirectory;
-        private System.Windows.Forms.Button buttonApply;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBoxShaderRootDirectory;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button buttonBrowse;
