@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -30,16 +31,18 @@ namespace shader_configurator
                 {
                     this.command_name = match.Groups[1].Value;
                     //Removing paths from strings
-                    string[] line = match.Groups[2].Value.Replace(Shader.GetShaderCopyRootDirectory(), "").Replace(Shader.GetShaderRootDirectory(), "").Trim('"').Split(';');
+                    //  string[] line = match.Groups[2].Value.Replace(Shader.GetShaderCopyRootDirectory(), "").Replace(Shader.GetShaderRootDirectory(), "").Trim('"').Split(';');
+                    List<String> sList = GetValues(match.Groups[2].Value);
                     //Removing (*) from copies
                     Regex r = new Regex(@"\(\d\)");
-                    for (int i = 0; i < line.Length; i++) { line[i] = r.Replace(line[i], ""); }
+                    //for (int i = 0; i < line.Length; i++) { line[i] = r.Replace(line[i], ""); }
+                    for (int i = 0; i < sList.Count; i++) { sList[i] = r.Replace(sList[i], ""); }
                     //Getting Matching value from Shader Dictionary
-                    for (int i = 0; i < line.Length; i++)
+                    for (int i = 0; i < sList.Count; i++)
                     {
-                        if (!String.IsNullOrEmpty(line[i]))
+                        if (!String.IsNullOrEmpty(sList[i]))
                         {
-                            values.Add(Shader.shaders.FirstOrDefault(x => x.Value == line[i]).Key);
+                            values.Add(Shader.shaders.FirstOrDefault(x => x.Value == sList[i]).Key);
                         }
                     }
                 }
@@ -87,6 +90,22 @@ namespace shader_configurator
             }
             string str = @"""" + sb.ToString().TrimEnd(';') + @"""";
             return this.command_name + " " + str;
+        }
+
+        public static List<String> GetValues(string cmd)
+        {
+            List<String> sList = new List<String>();
+            //Remove "" and replace / with \
+            cmd = cmd.Replace("/", "\\").Replace(@"""", "");
+            //Split string by ;
+            string[] line = cmd.Split(';');
+            //Get filename for each string
+            foreach(string element in line)
+            {
+                string filename = Path.GetFileName(element);
+                sList.Add(filename);
+            }
+            return sList;
         }
     }
 }

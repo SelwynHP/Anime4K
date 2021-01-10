@@ -98,6 +98,14 @@ namespace UnitTestProject1
             string pattern = Validation.patternCommand;
             Assert.IsTrue(Regex.IsMatch(cmd.ValueOutput(), pattern));
         }
+        [TestMethod]
+        public void CommandGetFiles()
+        {
+            string cmd = "C:/Users/VMRIG/AppData/Roaming/mpv/shaders/Anime4K_Upscale_CNN_L_x2_Denoise.glsl;C:/Users/VMRIG/AppData/Roaming/mpv/shaders/Anime4K_Auto_Downscale_Pre_x4.glsl;C:/Users/VMRIG/AppData/Roaming/mpv/shaders/Anime4K_Upscale_CNN_M_x2_Deblur.glsl";
+            List<String> sList = new List<string> { "Anime4K_Upscale_CNN_L_x2_Denoise.glsl","Anime4K_Auto_Downscale_Pre_x4.glsl","Anime4K_Upscale_CNN_M_x2_Deblur.glsl" };
+            List<String> vList = Command.GetValues(cmd);
+            Assert.IsTrue(vList.All(sList.Contains)&&vList.Count==sList.Count);
+        }
     }
     [TestClass]
     public class UnitTestControl
