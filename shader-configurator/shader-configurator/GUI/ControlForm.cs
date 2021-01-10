@@ -1,5 +1,6 @@
 ﻿using shader_configurator.DAL;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -133,6 +134,7 @@ namespace shader_configurator.GUI
             }
 
             SetControlView();
+            SetControlList();
         }
         private void buttonDeleteProfile_Click(object sender, EventArgs e)
         {
@@ -288,6 +290,15 @@ namespace shader_configurator.GUI
                 //Missing Directory is created
                 Directory.CreateDirectory(Shader.GetShaderCopyRootDirectory());
                 MessageBox.Show("Directory " + Shader.GetShaderCopyRootDirectory() + " created!");
+            }
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to update the paths for ALL profiles?", "Action Confirmation", MessageBoxButtons.YesNoCancel);
+            if(result == DialogResult.Yes)
+            {
+                ControlManagement.SetControls(ControlManagement.GetControls());
             }
         }
     }
