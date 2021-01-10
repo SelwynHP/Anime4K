@@ -55,6 +55,9 @@
             this.listBoxControls = new System.Windows.Forms.ListBox();
             this.comboBoxBindingFirstKey = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.comboBoxCopies = new System.Windows.Forms.ComboBox();
+            this.buttonCopy = new System.Windows.Forms.Button();
+            this.labelCopies = new System.Windows.Forms.Label();
             this.buttonBrowse2 = new System.Windows.Forms.Button();
             this.labelShaderCopyRootDirectory = new System.Windows.Forms.Label();
             this.textBoxShaderCopyRootDirectory = new System.Windows.Forms.TextBox();
@@ -63,9 +66,7 @@
             this.buttonApply = new System.Windows.Forms.Button();
             this.textBoxShaderRootDirectory = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.buttonCopy = new System.Windows.Forms.Button();
-            this.labelCopies = new System.Windows.Forms.Label();
-            this.comboBoxCopies = new System.Windows.Forms.ComboBox();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.TabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -241,7 +242,7 @@
             this.listBoxShaders.Size = new System.Drawing.Size(233, 82);
             this.listBoxShaders.TabIndex = 17;
             // 
-            // textBoxBinding3
+            // textBoxBindingSecondKey
             // 
             this.textBoxBindingSecondKey.Location = new System.Drawing.Point(210, 32);
             this.textBoxBindingSecondKey.Name = "textBoxBindingSecondKey";
@@ -329,7 +330,7 @@
             this.listBoxControls.TabIndex = 3;
             this.listBoxControls.SelectedIndexChanged += new System.EventHandler(this.listBoxControls_SelectedIndexChanged);
             // 
-            // comboBoxBinding
+            // comboBoxBindingFirstKey
             // 
             this.comboBoxBindingFirstKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBindingFirstKey.FormattingEnabled = true;
@@ -340,6 +341,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonUpdate);
             this.tabPage2.Controls.Add(this.comboBoxCopies);
             this.tabPage2.Controls.Add(this.buttonCopy);
             this.tabPage2.Controls.Add(this.labelCopies);
@@ -357,6 +359,46 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxCopies
+            // 
+            this.comboBoxCopies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCopies.FormattingEnabled = true;
+            this.comboBoxCopies.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxCopies.Location = new System.Drawing.Point(97, 117);
+            this.comboBoxCopies.Name = "comboBoxCopies";
+            this.comboBoxCopies.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCopies.TabIndex = 10;
+            // 
+            // buttonCopy
+            // 
+            this.buttonCopy.Location = new System.Drawing.Point(500, 118);
+            this.buttonCopy.Name = "buttonCopy";
+            this.buttonCopy.Size = new System.Drawing.Size(75, 20);
+            this.buttonCopy.TabIndex = 9;
+            this.buttonCopy.Text = "Copy";
+            this.buttonCopy.UseVisualStyleBackColor = true;
+            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
+            // 
+            // labelCopies
+            // 
+            this.labelCopies.AutoSize = true;
+            this.labelCopies.Location = new System.Drawing.Point(94, 102);
+            this.labelCopies.Name = "labelCopies";
+            this.labelCopies.Size = new System.Drawing.Size(91, 13);
+            this.labelCopies.TabIndex = 8;
+            this.labelCopies.Text = "Number of Copies";
             // 
             // buttonBrowse2
             // 
@@ -405,7 +447,7 @@
             // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(419, 271);
+            this.buttonApply.Location = new System.Drawing.Point(500, 164);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(75, 23);
             this.buttonApply.TabIndex = 1;
@@ -420,45 +462,15 @@
             this.textBoxShaderRootDirectory.Size = new System.Drawing.Size(397, 20);
             this.textBoxShaderRootDirectory.TabIndex = 0;
             // 
-            // buttonCopy
+            // buttonUpdate
             // 
-            this.buttonCopy.Location = new System.Drawing.Point(500, 118);
-            this.buttonCopy.Name = "buttonCopy";
-            this.buttonCopy.Size = new System.Drawing.Size(75, 20);
-            this.buttonCopy.TabIndex = 9;
-            this.buttonCopy.Text = "Copy";
-            this.buttonCopy.UseVisualStyleBackColor = true;
-            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
-            // 
-            // labelCopies
-            // 
-            this.labelCopies.AutoSize = true;
-            this.labelCopies.Location = new System.Drawing.Point(94, 102);
-            this.labelCopies.Name = "labelCopies";
-            this.labelCopies.Size = new System.Drawing.Size(91, 13);
-            this.labelCopies.TabIndex = 8;
-            this.labelCopies.Text = "Number of Copies";
-            // 
-            // comboBoxCopies
-            // 
-            this.comboBoxCopies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCopies.FormattingEnabled = true;
-            this.comboBoxCopies.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.comboBoxCopies.Location = new System.Drawing.Point(97, 117);
-            this.comboBoxCopies.Name = "comboBoxCopies";
-            this.comboBoxCopies.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxCopies.TabIndex = 10;
+            this.buttonUpdate.Location = new System.Drawing.Point(581, 40);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 20);
+            this.buttonUpdate.TabIndex = 11;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // ControlForm
             // 
@@ -517,5 +529,6 @@
         private System.Windows.Forms.ComboBox comboBoxCopies;
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.Label labelCopies;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }
