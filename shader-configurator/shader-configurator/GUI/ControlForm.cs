@@ -279,6 +279,8 @@ namespace shader_configurator.GUI
                         }
                     }
                     MessageBox.Show("Copy Completed");
+                    Properties.Settings.Default.NumberOfCopies = Convert.ToInt32(comboBoxCopies.SelectedItem.ToString());
+                    Properties.Settings.Default.Save();
                 }//end second if
                 else
                 {
