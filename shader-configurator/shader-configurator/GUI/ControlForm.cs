@@ -230,7 +230,7 @@ namespace shader_configurator.GUI
                 textBoxShaderCopyRootDirectory.Text = folderBrowserDialog1.SelectedPath;
             }
         }
-        private void buttonApply_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
             //Setting ShaderRootDirectory
             Properties.Settings.Default.ShaderRootDirectory = textBoxShaderRootDirectory.Text;
@@ -242,6 +242,8 @@ namespace shader_configurator.GUI
             Properties.Settings.Default.Save();
             //Display confirmation
             MessageBox.Show("Settings Saved!", "Confirmation");
+            //Update filepath
+            this.buttonUpdate_Click(this, null);
         }
 
         private void buttonCopy_Click(object sender, EventArgs e)
@@ -301,6 +303,7 @@ namespace shader_configurator.GUI
             if(result == DialogResult.Yes)
             {
                 ControlManagement.SetControls(ControlManagement.GetControls());
+                SetControlList();
             }
         }
     }

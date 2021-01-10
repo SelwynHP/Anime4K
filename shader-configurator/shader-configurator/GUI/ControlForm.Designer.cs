@@ -463,7 +463,7 @@
             this.buttonSave.TabIndex = 1;
             this.buttonSave.Text = "Save Settings";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonApply_Click);
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // textBoxShaderRootDirectory
             // 
